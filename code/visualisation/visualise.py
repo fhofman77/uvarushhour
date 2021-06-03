@@ -3,7 +3,7 @@ from ..classes.objects import Car
 
 def visualise():
     vehicles = []
-    with open('/Users/frank/Documents/UVA 2020:2021/Programmeren/programeer theorie/uvarushhour/data/gameboards/Rushhour6x6_1.csv', newline='') as gamefile:
+    with open('data/gameboards/Rushhour6x6_1.csv', newline='') as gamefile:
         rows = csv.reader(gamefile, delimiter=',')
         next(rows)
         count = 0
@@ -13,13 +13,19 @@ def visualise():
 
     for row in range(6):
         for col in range(6):
-        #     print('# ', end='')
-        # print()
+            printed = False
             for car in range(len(vehicles)):
                 if int(col + 1) == int(vehicles[car].col) and int(row + 1) == int(vehicles[car].row):
-                    print(vehicles[car].car, end='')
-                else:
-                    print('*', end='')
+                    print(f'{vehicles[car].car} ', end='')
+                    printed = True
+                    if vehicles[car].orientation == 'H':
+                        print(f'{vehicles[car].car} ', end='')
+                        col += 1
+                        if int(vehicles[car].length) == 3:
+                            print(f'{vehicles[car].car} ', end='')
+                            col += 1
+            if not printed:    
+                print('# ', end='')
         print()
     
 
