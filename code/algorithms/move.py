@@ -1,3 +1,4 @@
+from ..visualisation.visualise import visualise
 moves = []
 
 def move(Car, distance):
@@ -14,7 +15,7 @@ def move(Car, distance):
     return Car
 
 vehicles = []
-with open('code/data/gameboards/Rushhour6x6_1.csv', newline='') as gamefile:
+with open('data/gameboards/Rushhour6x6_1.csv', newline='') as gamefile:
     rows = csv.reader(gamefile, delimiter=',')
     next(rows)
     count = 0
