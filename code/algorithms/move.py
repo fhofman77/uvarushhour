@@ -4,29 +4,23 @@ import csv
 moves = []
 
 
-def move(Car, distance):
+def move(car, distance):
     # if the car is moved, append to moves
     if distance != 0:
-        moves.append(Car, distance)
+        moves.append(f'{car.car},{distance}')
+    
+    increased = int(car.col) + distance
 
     # move the car
-    if Car.orientation == 'H':
-        Car.col += distance
-    if Car.orientation == 'V':
-        Car.row += distance
+    if car.orientation == 'H':
+        car.col = increased
+    if car.orientation == 'V':
+        car.row = increased
 
-    return Car
+    return car
 
-
-vehicles = []
-with open('data/gameboards/Rushhour6x6_1.csv', newline='') as gamefile:
-    rows = csv.reader(gamefile, delimiter=',')
-    next(rows)
-    count = 0
-    for row in rows:
-        vehicle = Car(row[0], row[1], row[2], row[3], row[4])
-        vehicles.append(vehicle)
+vehicles = visualise()
 
 print(vehicles[0])
-move(vehicles[0], 1)
-print(moves)
+# move(vehicles[0], 1)
+# print(moves)

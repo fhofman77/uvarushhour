@@ -6,7 +6,6 @@ def visualise():
     with open('data/gameboards/Rushhour6x6_1.csv', newline='') as gamefile:
         rows = csv.reader(gamefile, delimiter=',')
         next(rows)
-        count = 0
         for row in rows:
             vehicle = Car(row[0], row[1], row[2], row[3], row[4])
             vehicles.append(vehicle)
