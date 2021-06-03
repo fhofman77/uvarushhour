@@ -1,5 +1,7 @@
 from ..visualisation.visualise import visualise
+import csv
 moves = []
+
 
 def move(Car, distance):
     # if the car is moved, append to moves
@@ -13,6 +15,7 @@ def move(Car, distance):
         Car.row += distance
 
     return Car
+
 
 vehicles = []
 with open('data/gameboards/Rushhour6x6_1.csv', newline='') as gamefile:
