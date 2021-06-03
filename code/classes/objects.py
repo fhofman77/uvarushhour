@@ -4,10 +4,7 @@ class Board():
         self.col = size
         # rows run horizontal (like a x axes)
         self.row = size
-        # self.exit =
-
-        # Winning board
-        # Previous Boards
+        self.moves = []
 
 
 class Car():
@@ -19,4 +16,15 @@ class Car():
         self.row = row
         self.length = length
 
-    
+    def move(self, distance):
+        # if the car is moved, append to moves
+        if distance != 0:
+            Board.moves.append(f'{self.car},{distance}')
+
+        increased = self.col + distance
+
+        # move the car
+        if self.orientation == 'H':
+            self.col = increased
+        if self.orientation == 'V':
+            self.row = increased
