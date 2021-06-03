@@ -11,8 +11,8 @@ def visualise():
             vehicle = Car(row[0], row[1], row[2], row[3], row[4])
             vehicles.append(vehicle)
 
-    for row in range(5):
-        for col in range(5):
+    for row in range(6):
+        for col in range(6):
         #     print('# ', end='')
         # print()
             for car in range(len(vehicles)):
