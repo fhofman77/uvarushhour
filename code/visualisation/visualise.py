@@ -1,7 +1,8 @@
 import csv
-from ..classes.objects import Car
+from ..classes.objects import Car, moves
 
-def visualise():
+
+def visualiser():
     vehicles = []
     with open('data/gameboards/Rushhour6x6_1.csv', newline='') as gamefile:
         rows = csv.reader(gamefile, delimiter=',')
@@ -23,10 +24,10 @@ def visualise():
                         if int(vehicles[car].length) == 3:
                             print(f'{vehicles[car].car} ', end='')
                             col += 1
-            if not printed:    
+            if not printed:
                 print('# ', end='')
         print()
 
         return vehicles
-    
+
 

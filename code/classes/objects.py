@@ -1,4 +1,6 @@
-moves = []
+moves = {
+    'car': 'move'
+}
 
 
 class Board():
@@ -14,15 +16,15 @@ class Car():
         # in the data the last car is the car that needs to escape
         self.car = car
         self.orientation = orientation
-        self.col = col
-        self.row = row
-        self.length = length
+        self.col = int(col)
+        self.row = int(row)
+        self.length = int(length)
         self.moves = []
 
     def move(self, distance):
         # if the car is moved, append to moves
         if distance != 0:
-            moves.append(f'{self.car},{distance}')
+            moves[self.car] = distance
 
         increased = self.col + distance
 
@@ -31,14 +33,3 @@ class Car():
             self.col = increased
         if self.orientation == 'V':
             self.row = increased
-
-
-Horizontal = Car("Horizontal Move", "H", 4, 1, 3)
-print(Horizontal[0], Horizontal[5])
-Car.move(Horizontal, 2)
-print(Horizontal[0], Horizontal[5])
-
-Vertical = Car("Vertical Move", 'V', 4, 1, 2)
-print(Vertical[0], Vertical[5])
-Car.move(Vertical, 2)
-print(Vertical[0], Vertical[5])
