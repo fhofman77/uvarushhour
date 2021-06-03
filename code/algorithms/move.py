@@ -1,3 +1,4 @@
+from ..visualisation.visualise import visualise
 moves = []
 
 def move(Car, distance):
