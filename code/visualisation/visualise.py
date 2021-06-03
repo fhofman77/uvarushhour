@@ -27,5 +27,7 @@ def visualise():
             if not printed:    
                 print('# ', end='')
         print()
+
+        return vehicles
     
 
