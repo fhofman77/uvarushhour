@@ -1,3 +1,5 @@
+from code.visualising import visualise
+
 moves = []
 
 
@@ -34,11 +36,10 @@ class Car():
 
 
 Horizontal = Car("Horizontal Move", "H", 4, 1, 3)
-print(Horizontal[0], Horizontal[5])
-Car.move(Horizontal, 2)
-print(Horizontal[0], Horizontal[5])
 
-Vertical = Car("Vertical Move", 'V', 4, 1, 2)
-print(Vertical[0], Vertical[5])
-Car.move(Vertical, 2)
-print(Vertical[0], Vertical[5])
+
+vehicles = visualise()
+
+print(vehicles[0])
+vehicles[0].move(vehicles[0], 1)
+print(moves)

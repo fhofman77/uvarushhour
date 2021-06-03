@@ -1,5 +1,6 @@
 import csv
-from ..classes.objects import Car
+from .objects import Car
+
 
 def visualise():
     vehicles = []
@@ -23,10 +24,8 @@ def visualise():
                         if int(vehicles[car].length) == 3:
                             print(f'{vehicles[car].car} ', end='')
                             col += 1
-            if not printed:    
+            if not printed:
                 print('# ', end='')
         print()
 
         return vehicles
-    
-
