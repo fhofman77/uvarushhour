@@ -1,3 +1,4 @@
+from code.classes.objects import Car
 from ..visualisation.visualise import visualise
 import csv
 moves = []
