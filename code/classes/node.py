@@ -1,3 +1,3 @@
 class Node():
-    def __init__(self. car):
+    def __init__(self, car):
         self.car = car
