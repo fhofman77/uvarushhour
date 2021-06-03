@@ -10,6 +10,9 @@ class Board():
         # rows run horizontal (like a x axes)
         self.row = size
 
+        """Add Desired End Board"""
+        """Add current board"""
+
 
 class Car():
     def __init__(self, car, orientation, col, row, length):
@@ -26,6 +29,7 @@ class Car():
         if distance != 0:
             moves[self.car] = distance
 
+        """Still need to update the board"""
         increased = self.col + distance
 
         # move the car
