@@ -37,3 +37,7 @@ class Car():
             self.col = increased
         if self.orientation == 'V':
             self.row = increased
+
+    def valid_move(self):
+        """Return true is a move is possible otherwise return false?"""
+        pass
