@@ -18,3 +18,5 @@ class Car():
         self.col = col
         self.row = row
         self.length = length
+
+    
