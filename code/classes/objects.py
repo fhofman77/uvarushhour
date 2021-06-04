@@ -10,7 +10,10 @@ class Board():
         # rows run horizontal (like a x axes)
         self.row = size
 
+    def end_board(self):
         """Add Desired End Board"""
+        # Last car on the list is completely on the right side
+        pass
         """Add current board"""
 
 
@@ -40,4 +43,6 @@ class Car():
 
     def valid_move(self):
         """Return true is a move is possible otherwise return false?"""
+        # For every car check what spaces are occupied.
+        # If the move is not passing over any of these spaces return true
         pass
