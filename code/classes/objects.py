@@ -23,8 +23,9 @@ class Board():
         """If end_board == current_board return true"""
         pass
 
-    def passed_board(self):
-        """if 
+    def past_board(self):
+        """if the current board == a past board after doing moves, it cant be the fastest"""
+        pass
 
 
 
