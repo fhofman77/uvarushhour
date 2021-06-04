@@ -5,16 +5,16 @@ moves = {
 
 class Board():
     def __init__(self, size):
-        # columns run vertical (like a y axes)
+        # Columns run vertical (like a y axes)
         self.col = size
-        # rows run horizontal (like a x axes)
+        # Rows run horizontal (like a x axes)
         self.row = size
 
     def end_board(self):
         """Add Desired End Board"""
-        # Last car on the list is completely on the right side
+        # Last car of the csv-input is completely on the right side means it's WON
         pass
-    
+
     def current_board(self):
         """Add current board (after moves made)"""
         pass
@@ -28,10 +28,9 @@ class Board():
         pass
 
 
-
 class Car():
     def __init__(self, car, orientation, col, row, length):
-        # in the data the last car is the car that needs to escape
+        # In the data the last car is the car that needs to escape
         self.car = car
         self.orientation = orientation
         self.col = int(col)
@@ -40,18 +39,18 @@ class Car():
         self.moves = []
 
     def move(self, distance):
-        # if the car is moved, append to moves
+        # If the car is moved, append to moves
         if distance != 0:
             moves[self.car] = distance
 
-        """Still need to update the board"""
-        increased = self.col + distance
+        """Still need to UPDATE BOARD && CHECK valid_move"""
+        new_position = self.col + distance
 
-        # move the car
+        # Move the car
         if self.orientation == 'H':
-            self.col = increased
+            self.col = new_position
         if self.orientation == 'V':
-            self.row = increased
+            self.row = new_position
 
     def valid_move(self):
         """Return true is a move is possible otherwise return false?"""
