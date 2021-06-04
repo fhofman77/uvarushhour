@@ -14,7 +14,18 @@ class Board():
         """Add Desired End Board"""
         # Last car on the list is completely on the right side
         pass
-        """Add current board"""
+    
+    def current_board(self):
+        """Add current board (after moves made)"""
+        pass
+
+    def won_game(self):
+        """If end_board == current_board return true"""
+        pass
+
+    def passed_board(self):
+        """if 
+
 
 
 class Car():
