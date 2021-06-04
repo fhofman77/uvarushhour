@@ -24,7 +24,7 @@ class Board():
         pass
 
     def past_board(self):
-        """if the current board == a past board after doing moves, it cant be the fastest"""
+        """if the current board == a past board after doing moves, it cant be the fastest so keep track of the past boards"""
         pass
 
 
