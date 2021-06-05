@@ -1,10 +1,17 @@
 import csv
+import re
 from ..classes.objects import Car, moves
 
 
-def visualiser():
+def get_board_size(inputdata):
+    """Finds the value between 'Rushhour' and 'x' and returns it as an int"""
+    board_size = re.search('Rushhour(.*)x', inputdata)
+    return int((board_size.group(1)))
+
+
+def visualiser(csv_input):
     vehicles = []
-    with open('data/gameboards/Rushhour6x6_1.csv', newline='') as gamefile:
+    with open(csv_input, newline='') as gamefile:
         rows = csv.reader(gamefile, delimiter=',')
         next(rows)
         for row in rows:
@@ -14,7 +21,7 @@ def visualiser():
     # Dit werkt nu niet voor boards met een andere size dan 6, ook klopt de logica niet
     for row in range(6):
         for col in range(6):
-            """ 
+            """
             Beter om elke voor car een occupied spaces variabele aan te maken?
             Example: Car 1: occupied-row: [4], occupied col =[3,4,5]?
             Print car name if the row we are in == the occupied row of a car && col == occupied col
