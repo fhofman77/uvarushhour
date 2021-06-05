@@ -9,7 +9,7 @@ def get_board_size(inputdata):
     return int((board_size.group(1)))
 
 
-def visualiser(csv_input):
+def initialize_cars(csv_input):
     vehicles = []
     with open(csv_input, newline='') as gamefile:
         rows = csv.reader(gamefile, delimiter=',')
@@ -18,6 +18,7 @@ def visualiser(csv_input):
             vehicle = Car(row[0], row[1], row[2], row[3], row[4])
             vehicles.append(vehicle)
 
+    # Printen misschien beter in een andere functie
     # Dit werkt nu niet voor boards met een andere size dan 6, ook klopt de logica niet
     for row in range(6):
         for col in range(6):

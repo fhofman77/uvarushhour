@@ -1,10 +1,10 @@
-from code.visualisation.visualise import visualiser, get_board_size
+from code.visualisation.visualise import initialize_cars, get_board_size
 from code.classes.objects import moves
 import csv
 
-inputdata = 'data/gameboards/Rushhour6x6_1.csv'
+inputdata = 'data/gameboards/Rushhour12x12_7.csv'
 # Load all the vehicles
-vehicles = visualiser(inputdata)
+vehicles = initialize_cars(inputdata)
 
 vehicles[0].move(1)
 vehicles[2].move(-3)
@@ -15,7 +15,6 @@ with open('data/output/output.csv', 'w') as csv_file:
     writer = csv.writer(csv_file)
     for key, value in moves.items():
         writer.writerow([key, value])
-
 
 
 a = get_board_size(inputdata)
