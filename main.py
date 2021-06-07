@@ -1,4 +1,4 @@
-from code.visualisation.visualise import initialize_cars, get_board_size
+from code.visualisation.visualise import initialize_cars, get_board_size, print_board
 from code.classes.objects import moves
 import csv
 
@@ -18,4 +18,5 @@ with open('data/output/output.csv', 'w') as csv_file:
 
 
 a = get_board_size(inputdata)
+print_board(a)
 print(a)
