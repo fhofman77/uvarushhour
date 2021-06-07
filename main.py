@@ -1,14 +1,9 @@
-from code.visualisation.visualise import print_board
-from code.classes.objects import Board, get_board_size, moves
+from code.classes.objects import moves
+from code.visualisation.visualise import initialize_cars, get_board_size, print_board
 
-inputdata = 'data/gameboards/Rushhour6x6_3.csv'
+inputdata = 'data/gameboards/Rushhour6x6_1.csv'
 # Load all the vehicles
+print(get_board_size(inputdata))
+vehicles = initialize_cars(inputdata)
 
-board = Board(inputdata)
-print(board.get_board_size)
-
-
-print(board.vehicles[5].car)
-
-board.vehicles[0].valid_move(-2, board)
-board.vehicles[5].valid_move(-2, board)
+print_board(vehicles, get_board_size(inputdata))

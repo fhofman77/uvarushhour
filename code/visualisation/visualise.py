@@ -3,6 +3,13 @@ import re
 from ..classes.objects import Car, moves
 
 
+def get_board_size(inputdata):
+    """Finds the value between 'Rushhour' and 'x' and returns it as an int"""
+    board_size = re.search('Rushhour(.*)x', inputdata)
+    board_size = int((board_size.group(1)))
+    return board_size
+
+
 def print_board(vehicles, board_size):
     for row in range(board_size):
         for col in range(board_size):
@@ -10,13 +17,13 @@ def print_board(vehicles, board_size):
             for car in vehicles:
                 if car.orientation == 'H':
                     for i in range(car.length):
-                        if car.coordinate_row == row+1 and car.coordinate_col[i] == col+1:
+                        if car.cordinate_row == row+1 and car.cordinate_col[i] == col+1:
                             print(car.car, end=' ')
                             printed = True
                             continue
                 else:
                     for i in range(car.length):
-                        if car.coordinate_row[i] == row+1 and car.coordinate_col == col+1:
+                        if car.cordinate_row[i] == row+1 and car.cordinate_col == col+1:
                             print(car.car, end=' ')
                             printed = True
                             continue
@@ -40,17 +47,17 @@ def initialize_cars(csv_input):
 
     for car in vehicles:
         if car.orientation == 'H':
-            car.coordinate_row = car.row
+            car.cordinate_row = car.row
             for i in range(int(car.length)):
                 y = car.col
                 y += i
-                car.coordinate_col.append(y)
+                car.cordinate_col.append(y)
         else:
-            car.coordinate_col = car.col
+            car.cordinate_col = car.col
             for i in range(int(car.length)):
                 x = car.row
                 x += i
-                car.coordinate_row.append(x)
+                car.cordinate_row.append(x)
 
     return vehicles
 
