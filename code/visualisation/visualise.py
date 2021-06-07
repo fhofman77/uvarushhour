@@ -12,7 +12,7 @@ def get_board_size(inputdata):
     return board_size
 
 
-def print_board(vehicles, board_size,):
+def print_board(board_size):
     for row in range(board_size):
         for col in range(6):
             printed = False
@@ -84,6 +84,7 @@ def initialize_cars(csv_input):
     
     return vehicles
 
+<<<<<<< HEAD
 def print_board(board_size, vehicles):     
         for row in range(board_size):
             for col in range(board_size):
@@ -110,11 +111,42 @@ def print_board(board_size, vehicles):
 
 
         # """
+=======
+
+def print_cars(vehicles, board_size):
+    """Prints the board using the board size and the vehicle names"""
+    for row in range(board_size):
+        for col in range(board_size):
+            printed = False
+            for car in vehicles:
+                if car.orientation == 'H':
+                    for i in range(car.length):
+                        # print(f'loop {car.cordinate_col[i]}', end='')
+                        # print(f'not loop {col+1}, row {row+1}, car row {car.cordinate_row}')
+                        if car.cordinate_row == row+1 and car.cordinate_col[i] == col+1:
+                            print(car.car, end=' ')
+                            printed = True
+                            continue
+                else:
+                    for i in range(car.length):
+                        if car.cordinate_row[i] == row+1 and car.cordinate_col == col+1:
+                            print(car.car, end=' ')
+                            printed = True
+                            continue
+                        # elif printed == False and i == len(car.cordinate_row)-1:
+                        #     print('# ', end='')
+                        #     printed = True
+            if printed == False:
+                print('# ', end='')
+                printed = True
+
+>>>>>>> parent of 0e9b5ac (fixed duplicates)
         # Beter om elke voor car een occupied spaces variabele aan te maken?
         # Example: Car 1: occupied-row: [4], occupied col =[3,4,5]?
         # Print car name if the row we are in == the occupied row of a car && col == occupied col
         # Else print *
         # Deze kunnen we dan ook gebruiken om te checken of een move kan
+<<<<<<< HEAD
         # """
         #     printed = False
         #     for car in range(len(vehicles)):
@@ -137,6 +169,8 @@ def print_board(board_size, vehicles):
     # Print car name if the row we are in == the occupied row of a car && col == occupied col
     # Else print *
     # Deze kunnen we dan ook gebruiken om te checken of een move kan
+=======
+>>>>>>> parent of 0e9b5ac (fixed duplicates)
 
 
 def create_csv(moves):
