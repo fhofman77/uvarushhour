@@ -1,13 +1,16 @@
+<<<<<<< Updated upstream
 from code.visualisation.visualise import initialize_cars, get_board_size, print_board
+=======
+from code.visualisation.visualise import initialize_cars, get_board_size, print_cars
+>>>>>>> Stashed changes
 from code.classes.objects import moves
-import csv
-
 inputdata = 'data/gameboards/Rushhour6x6_1.csv'
 # Load all the vehicles
 vehicles = initialize_cars(inputdata)
 
 vehicles[0].move(1)
 vehicles[2].move(-3)
+<<<<<<< Updated upstream
 print(f"Moves: {moves}")
 
 # Creates a CSV file from all the moves that have been added to the dict
@@ -20,3 +23,6 @@ with open('data/output/output.csv', 'w') as csv_file:
 a = get_board_size(inputdata)
 print_board(a)
 print(a)
+=======
+print_cars(vehicles, get_board_size(inputdata))
+>>>>>>> Stashed changes

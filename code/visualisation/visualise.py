@@ -1,6 +1,6 @@
 import csv
 import re
-from ..classes.objects import Car, moves
+from ..classes.objects import Car
 
 
 def get_board_size(inputdata):
@@ -33,6 +33,7 @@ def print_board(board_size):
             print('', end='\n')
 
 def initialize_cars(csv_input):
+    """Initializes the Car objects and adds the occupied spaces per car"""
     vehicles = []
     with open(csv_input, newline='') as gamefile:
         rows = csv.reader(gamefile, delimiter=',')
@@ -47,20 +48,25 @@ def initialize_cars(csv_input):
     for car in vehicles:
         if car.orientation == 'H':
             car.cordinate_row = car.row
-            for i in range(int(car.length)):
+            for i in range(car.length):
                 y = car.col
                 y += i
                 car.cordinate_col.append(y)
         else:
             car.cordinate_col = car.col
-            for i in range(int(car.length)):
+            for i in range(car.length):
                 x = car.row
                 x += i
                 car.cordinate_row.append(x)
         print(car.car, car.cordinate_row, car.cordinate_col)
 
-    for row in range(get_board_size(csv_input)):
-        for col in range(get_board_size(csv_input)):
+    return vehicles
+
+
+def print_cars(vehicles, board_size):
+    """Prints the board using the board size and the vehicle names"""
+    for row in range(board_size):
+        for col in range(board_size):
             printed = False
             for car in vehicles:
                 if car.orientation == 'H':
@@ -109,4 +115,10 @@ def initialize_cars(csv_input):
         #         print('# ', end='')
         # print()
 
-    return vehicles
+
+def create_csv(moves):
+    """Creates a CSV file from all the moves that have been added to a dict"""
+    with open(f'data/output/output{moves}.csv', 'w') as csv_file:
+        writer = csv.writer(csv_file)
+        for key, value in moves.items():
+            writer.writerow([key, value])
