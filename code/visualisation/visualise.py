@@ -36,8 +36,8 @@ def initialize_cars(csv_input):
         print(car.car, car.cordinate_row, car.cordinate_col)
             
             
-    for row in range(6):
-        for col in range(6):
+    for row in get_board_size(csv_input):
+        for col in get_board_size(csin):
             printed = False
             for car in vehicles:
                 if car.orientation == 'H':
