@@ -10,7 +10,7 @@ class Board():
         # Rows run horizontal (like a x axes)
         self.row = size
 
-    def end_board(self):
+    def winning_board(self):
         """Add Desired End Board"""
         # Last car of the csv-input is completely on the right side means it's WON
         pass
@@ -41,7 +41,7 @@ class Car():
         self.cordinate_col = []
 
     def move(self, distance):
-        # If the car is moved, append to moves
+        # If the car is moved, append to moves dictionairy
         if distance != 0:
             moves[self.car] = distance
 
