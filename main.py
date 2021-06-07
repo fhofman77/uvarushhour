@@ -18,5 +18,4 @@ with open('data/output/output.csv', 'w') as csv_file:
 
 
 a = get_board_size(inputdata)
-print_board(a)
-print(a)
+print_board(a, vehicles)
