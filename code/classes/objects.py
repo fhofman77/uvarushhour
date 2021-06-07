@@ -1,5 +1,6 @@
-import re
 import csv
+import re
+from code.visualisation.visualise import print_board
 
 
 def initialize_cars(csv_input):
@@ -13,9 +14,27 @@ def initialize_cars(csv_input):
 
     # Printen misschien beter in een andere functie
     # Dit werkt nu niet voor boards met een andere size dan 6, ook klopt de logica niet
-    """Dit kan ook in het Car object"""
+
+    for car in vehicles:
+        if car.orientation == 'H':
+            car.coordinate_row.append(car.row)
+            for i in range(int(car.length)):
+                y = car.col
+                y += i
+                car.coordinate_col.append(y)
+        else:
+            car.coordinate_col.append(car.col)
+            for i in range(int(car.length)):
+                x = car.row
+                x += i
+                car.coordinate_row.append(x)
 
     return vehicles
+
+
+moves = {
+    'car': 'move'
+}
 
 
 def get_board_size(inputdata):
@@ -23,11 +42,6 @@ def get_board_size(inputdata):
     board_size = re.search('Rushhour(.*)x', inputdata)
     board_size = int((board_size.group(1)))
     return board_size
-
-
-moves = {
-    'car': 'move'
-}
 
 
 class Board():
@@ -39,13 +53,16 @@ class Board():
         self.row = get_board_size(inputdata)
         self.vehicles = initialize_cars(inputdata)
 
-    def get_board_size(self):
+    def size(self):
         return self.size
 
     def winning_board(self):
         """Add Desired End Board"""
         # Last car of the csv-input is completely on the right side means it's WON
         pass
+
+    def print_board(self):
+        return print_board(self.vehicles, self.size)
 
     def current_board(self):
         """Add current board (after moves made)"""
@@ -120,6 +137,7 @@ class Car():
                                 else:
                                     return True
 
+        # If the car is vertical
         else:
             # Move up
             if distance < 0:
@@ -139,10 +157,10 @@ class Car():
                     print("Out of bottom")
                     return False
 
-            # Voor elke auto
+            # For each car on the board
             for car in board.vehicles:
-                print(car.car)
-                # Als de auto in dezelfde kolom zit
+
+                # If the car is in the same
                 if self.col in car.coordinate_col or self.col == car.col:
                     print(car.car)
                     # En het is niet deze auto
@@ -168,23 +186,3 @@ class Car():
                                 else:
                                     print('Moved bottom good move')
                                     return True
-
-        """Return true is a move is possible otherwise return false?
-        if self.orientation == 'H':
-            # Als horizontaal
-            for car in cars:
-                # Check voor elke auto
-                if car is not self:
-                    # Als de auto niet deze auto is
-                    for i in self.coordinate_col:
-                        if car.coordinate_col == i + distance:
-
-
-                        # begin tot distance + 1 (groote 2) of 2 (groote 3)
-
-                    print('Hello')"""
-
-        # For every car check what spaces are occupied.
-        # If the move is not passing over any of these spaces return true
-
-        pass

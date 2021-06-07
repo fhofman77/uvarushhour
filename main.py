@@ -1,14 +1,20 @@
-from code.visualisation.visualise import print_board
-from code.classes.objects import Board, get_board_size, moves
+from code.classes.objects import Board
 
 inputdata = 'data/gameboards/Rushhour6x6_3.csv'
 # Load all the vehicles
 
 board = Board(inputdata)
-print(board.get_board_size)
 
+# Deze print werkt
+board.print_board()
 
-print(board.vehicles[5].car)
+# Dit zijn de goede waardes
+print(f'{board.vehicles[1].car}: ROW {board.vehicles[1].coordinate_row}')
+print(f'{board.vehicles[1].car}: COL {board.vehicles[1].coordinate_col}')
+print(f'{board.vehicles[5].car}: ROW {board.vehicles[5].coordinate_row}')
+print(f'{board.vehicles[5].car}: COL {board.vehicles[5].coordinate_col}')
 
-board.vehicles[0].valid_move(-2, board)
-board.vehicles[5].valid_move(-2, board)
+# 1 beweging
+board.vehicles[1].move(1)
+# Deze print werkt niet meer
+board.print_board()
