@@ -1,6 +1,8 @@
 moves = {
     'car': 'move'
 }
+
+
 class Board():
     def __init__(self, size):
         # Columns run vertical (like a y axes)

@@ -1,11 +1,12 @@
 import csv
 import re
-from ..classes.objects import Car
+from ..classes.objects import Car, moves
 
 
 def get_board_size(inputdata):
     """Finds the value between 'Rushhour' and 'x' and returns it as an int"""
     board_size = re.search('Rushhour(.*)x', inputdata)
+<<<<<<< HEAD
     board_size = int((board_size.group(1)))
     # print_board()
     return board_size
@@ -32,10 +33,12 @@ def print_board(board_size):
                 print('# ', end='')
                 printed = True
         print('', end='\n')
+=======
+    return int((board_size.group(1)))
+>>>>>>> parent of a9d7519 (Merge branch 'main' into frank)
 
 
 def initialize_cars(csv_input):
-    """Initializes the Car objects and adds the occupied spaces per car"""
     vehicles = []
     with open(csv_input, newline='') as gamefile:
         rows = csv.reader(gamefile, delimiter=',')
@@ -50,13 +53,13 @@ def initialize_cars(csv_input):
     for car in vehicles:
         if car.orientation == 'H':
             car.cordinate_row = car.row
-            for i in range(car.length):
+            for i in range(int(car.length)):
                 y = car.col
                 y += i
                 car.cordinate_col.append(y)
         else:
             car.cordinate_col = car.col
-            for i in range(car.length):
+            for i in range(int(car.length)):
                 x = car.row
                 x += i
                 car.cordinate_row.append(x)
@@ -64,11 +67,16 @@ def initialize_cars(csv_input):
 
     return vehicles
 
+<<<<<<< HEAD
 
 def print_cars(vehicles, board_size):
     """Prints the board using the board size and the vehicle names"""
     for row in range(board_size):
         for col in range(board_size):
+=======
+    for row in range(get_board_size(csv_input)):
+        for col in range(get_board_size(csv_input)):
+>>>>>>> parent of a9d7519 (Merge branch 'main' into frank)
             printed = False
             for car in vehicles:
                 if car.orientation == 'H':
@@ -97,6 +105,7 @@ def print_cars(vehicles, board_size):
         # Print car name if the row we are in == the occupied row of a car && col == occupied col
         # Else print *
         # Deze kunnen we dan ook gebruiken om te checken of een move kan
+<<<<<<< HEAD
 
 
 def create_csv(moves):
@@ -105,3 +114,20 @@ def create_csv(moves):
         writer = csv.writer(csv_file)
         for key, value in moves.items():
             writer.writerow([key, value])
+=======
+        # """
+        #     printed = False
+        #     for car in range(len(vehicles)):
+        #         if col + 1 == vehicles[car].col and row + 1 == vehicles[car].row:
+        #             print(f'{vehicles[car].car} ', end='')
+        #             printed = True
+        #             if vehicles[car].orientation == 'H':
+        #                 print(f'{vehicles[car].car} ', end='')
+        #                 col += 1
+        #                 if vehicles[car].length == 3:
+        #                     print(f'{vehicles[car].car} ', end='')
+        #                     col += 1
+        #     if not printed:
+        #         print('# ', end='')
+        # print()
+>>>>>>> parent of a9d7519 (Merge branch 'main' into frank)
