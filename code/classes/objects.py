@@ -60,6 +60,5 @@ class Car():
         """Return true is a move is possible otherwise return false?"""
         # For every car check what spaces are occupied.
         # If the move is not passing over any of these spaces return true
-    
-    def g
+        
         pass
