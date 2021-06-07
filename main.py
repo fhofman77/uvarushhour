@@ -18,8 +18,8 @@ with open('data/output/output.csv', 'w') as csv_file:
 
 
 a = get_board_size(inputdata)
-print_board(a, vehicles)
-=======
 Car.move
 print_board()
 
+print_board(a)
+print(a)
