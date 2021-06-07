@@ -2,7 +2,6 @@ import csv
 import re
 from ..classes.objects import Car, moves
 
-
 def get_board_size(inputdata):
     """Finds the value between 'Rushhour' and 'x' and returns it as an int"""
     board_size = re.search('Rushhour(.*)x', inputdata)
@@ -21,7 +20,6 @@ def initialize_cars(csv_input):
     # Printen misschien beter in een andere functie
     # Dit werkt nu niet voor boards met een andere size dan 6, ook klopt de logica niet
 
-    occupied_coordinates = []
     for car in vehicles:
         if car.orientation == 'H':
             car.cordinate_row = car.row
@@ -38,18 +36,32 @@ def initialize_cars(csv_input):
         print(car.car, car.cordinate_row, car.cordinate_col)
             
             
+    for row in range(6):
+        for col in range(6):
+            printed = False
+            for car in vehicles:
+                if car.orientation == 'H':
+                    for i in range(car.length):
+                        # print(f'loop {car.cordinate_col[i]}', end='')
+                        # print(f'not loop {col+1}, row {row+1}, car row {car.cordinate_row}')
+                        if car.cordinate_row == row+1 and car.cordinate_col[i] == col+1:
+                            print(car.car, end=' ')
+                            printed = True
+                            continue
+                        elif printed == False and i == car.length-1:
+                            print('# ', end='')
+                            printed = True
+                else:
+                    for i in range(len(car.cordinate_row)):
+                        if car.cordinate_row[i] == row+1 and car.cordinate_col == col+1:
+                            print(car.car, end=' ')
+                            printed = True
+                            continue
+                        elif printed == False and i == len(car.cordinate_row)-1:
+                            print('# ', end='')
+                            printed = True
 
-    # for row in range(6):
-    #     for col in range(6):
-    #         printed = False
-    #         for i in occupied_coordinates:
-    #             if i[0] != row and i[1] != col and not printed:
-    #                 print('# ', end='')
-    #                 printed = True
-    #             elif not printed:
-    #                 print('* ', end='')
-    #                 printed = True
-    #     print('', end='\n')
+        print('', end='\n')
 
 
 
