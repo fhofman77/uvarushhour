@@ -7,13 +7,12 @@ def get_board_size(inputdata):
     """Finds the value between 'Rushhour' and 'x' and returns it as an int"""
     board_size = re.search('Rushhour(.*)x', inputdata)
     board_size = int((board_size.group(1)))
-    # print_board()
     return board_size
 
 
-def print_board(board_size, vehicles):
+def print_board(vehicles, board_size):
     for row in range(board_size):
-        for col in range(6):
+        for col in range(board_size):
             printed = False
             for car in vehicles:
                 if car.orientation == 'H':
