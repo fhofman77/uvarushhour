@@ -24,36 +24,32 @@ def initialize_cars(csv_input):
     occupied_coordinates = []
     for car in vehicles:
         if car.orientation == 'H':
-            x = car.row
+            car.cordinate_row = car.row
             for i in range(int(car.length)):
                 y = car.col
-                # print(f'y = {y} and i = {i}')
                 y += i
-                car_coordinates = [x, y]
-                occupied_coordinates.append(car_coordinates)
+                car.cordinate_col.append(y)
         else:
-            y = car.row
+            car.cordinate_col = car.col
             for i in range(int(car.col)):
                 x = car.col
-                # print(f'y = {y} and i = {i}')
                 x += i
-                car_coordinates = [x, y]
-                occupied_coordinates.append(car_coordinates)
-    print(occupied_coordinates)
+                car.cordinate_row.append(x)
+        print(car.car, car.cordinate_row, car.cordinate_col)
             
             
 
-    for row in range(6):
-        for col in range(6):
-            printed = False
-            for i in occupied_coordinates:
-                if i[0] != row and i[1] != col and not printed:
-                    print('# ', end='')
-                    printed = True
-                elif not printed:
-                    print('* ', end='')
-                    printed = True
-        print('', end='\n')
+    # for row in range(6):
+    #     for col in range(6):
+    #         printed = False
+    #         for i in occupied_coordinates:
+    #             if i[0] != row and i[1] != col and not printed:
+    #                 print('# ', end='')
+    #                 printed = True
+    #             elif not printed:
+    #                 print('* ', end='')
+    #                 printed = True
+    #     print('', end='\n')
 
 
 

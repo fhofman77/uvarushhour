@@ -37,6 +37,8 @@ class Car():
         self.row = int(row)
         self.length = int(length)
         self.moves = []
+        self.cordinate_row = []
+        self.cordinate_col = []
 
     def move(self, distance):
         # If the car is moved, append to moves
