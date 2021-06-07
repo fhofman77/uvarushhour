@@ -12,7 +12,7 @@ def get_board_size(inputdata):
 
 def print_board(board_size):     
         for row in range(board_size):
-            for col in range(board_size):
+            for col in range(6):
                 printed = False
                 for car in vehicles:
                     if car.orientation == 'H':
@@ -30,7 +30,6 @@ def print_board(board_size):
                 if printed == False:
                                 print('# ', end='')
                                 printed = True
-
             print('', end='\n')
 
 def initialize_cars(csv_input):
