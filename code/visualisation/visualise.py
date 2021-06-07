@@ -7,7 +7,6 @@ def get_board_size(inputdata):
     """Finds the value between 'Rushhour' and 'x' and returns it as an int"""
     board_size = re.search('Rushhour(.*)x', inputdata)
     board_size = int((board_size.group(1)))
-    # print_board()
     return board_size
 
 
