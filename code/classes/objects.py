@@ -4,7 +4,7 @@ moves = {
 
 
 class Board():
-    def __init__(self, size):
+    def __init__(self, size, vehicles):
         # Columns run vertical (like a y axes)
         self.col = size
         # Rows run horizontal (like a x axes)
@@ -51,8 +51,10 @@ class Car():
         # Move the car
         if self.orientation == 'H':
             self.col = new_position
+            self.cordinate_col = [i + distance for i in self.cordinate_col]
         if self.orientation == 'V':
             self.row = new_position
+            self.cordinate_row = [i + distance for i in self.cordinate_col]
 
     def valid_move(self):
         """Return true is a move is possible otherwise return false?"""
