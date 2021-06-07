@@ -6,5 +6,5 @@ inputdata = 'data/gameboards/Rushhour6x6_1.csv'
 print(get_board_size(inputdata))
 vehicles = initialize_cars(inputdata)
 
-
+vehicles[0].move(-1)
 print_board(vehicles, get_board_size(inputdata))
