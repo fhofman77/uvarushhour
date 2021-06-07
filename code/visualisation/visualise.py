@@ -29,8 +29,8 @@ def initialize_cars(csv_input):
                 car.cordinate_col.append(y)
         else:
             car.cordinate_col = car.col
-            for i in range(int(car.col)):
-                x = car.col
+            for i in range(int(car.length)):
+                x = car.row
                 x += i
                 car.cordinate_row.append(x)
         print(car.car, car.cordinate_row, car.cordinate_col)
@@ -48,16 +48,16 @@ def initialize_cars(csv_input):
                             print(car.car, end=' ')
                             printed = True
                             continue
-                        elif printed == False and i == car.length-1:
-                            print('# ', end='')
-                            printed = True
                 else:
-                    for i in range(len(car.cordinate_row)):
+                    for i in range(car.length):
                         if car.cordinate_row[i] == row+1 and car.cordinate_col == col+1:
                             print(car.car, end=' ')
                             printed = True
                             continue
-                        elif printed == False and i == len(car.cordinate_row)-1:
+                        # elif printed == False and i == len(car.cordinate_row)-1:
+                        #     print('# ', end='')
+                        #     printed = True
+            if printed == False:
                             print('# ', end='')
                             printed = True
 
