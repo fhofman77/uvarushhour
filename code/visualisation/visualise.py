@@ -58,7 +58,6 @@ def initialize_cars(csv_input):
                 x = car.row
                 x += i
                 car.cordinate_row.append(x)
-        print(car.car, car.cordinate_row, car.cordinate_col)
 
     return vehicles
 
