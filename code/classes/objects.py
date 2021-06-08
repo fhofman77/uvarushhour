@@ -14,22 +14,20 @@ def initialize_cars(csv_input):
 
     # Printen misschien beter in een andere functie
     # Dit werkt nu niet voor boards met een andere size dan 6, ook klopt de logica niet
-
+    occupied_row_col = []
     for car in vehicles:
         if car.orientation == 'H':
-            car.coordinate_row.append(car.row)
             for i in range(int(car.length)):
                 y = car.col
                 y += i
-                car.coordinate_col.append(y)
+                occupied_row_col.append([car.row, y])
         else:
-            car.coordinate_col.append(car.col)
             for i in range(int(car.length)):
                 x = car.row
                 x += i
-                car.coordinate_row.append(x)
+                occupied_row_col.append([x, car.col])
 
-    return vehicles
+    return vehicles, occupied_row_col
 
 
 moves = {
@@ -51,7 +49,8 @@ class Board():
         self.col = get_board_size(inputdata)
         # Rows run horizontal (like a x axes)
         self.row = get_board_size(inputdata)
-        self.vehicles = initialize_cars(inputdata)
+        self.vehicles, self.occupied_row_col = initialize_cars(
+            inputdata)
 
     def size(self):
         return self.size
@@ -60,6 +59,22 @@ class Board():
         """Add Desired End Board"""
         # Last car of the csv-input is completely on the right side means it's WON
         pass
+
+    def move_car(self, car, distance):
+        # If the car is moved, append to moves dictionairy
+        if distance != 0:
+            moves[car.car] = distance
+
+        """Still need to UPDATE BOARD && CHECK valid_move"""
+        new_position = car.col + distance
+
+        # Move the car
+        if car.orientation == 'H':
+            car.col = new_position
+            car.coordinate_col = [i + distance for i in car.coordinate_col]
+        if car.orientation == 'V':
+            car.row = new_position
+            car.coordinate_row = [i + distance for i in car.coordinate_col]
 
     def print_board(self):
         return print_board(self.vehicles, self.size)
@@ -88,22 +103,6 @@ class Car():
         self.moves = []
         self.coordinate_row = []
         self.coordinate_col = []
-
-    def move(self, distance):
-        # If the car is moved, append to moves dictionairy
-        if distance != 0:
-            moves[self.car] = distance
-
-        """Still need to UPDATE BOARD && CHECK valid_move"""
-        new_position = self.col + distance
-
-        # Move the car
-        if self.orientation == 'H':
-            self.col = new_position
-            self.coordinate_col = [i + distance for i in self.coordinate_col]
-        if self.orientation == 'V':
-            self.row = new_position
-            self.coordinate_row = [i + distance for i in self.coordinate_col]
 
     def valid_move(self, distance, board):
         if self.orientation == 'H':
