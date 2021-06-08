@@ -1,4 +1,5 @@
 from code.classes.objects import Board
+from code.classes.algorithms import random
 
 inputdata = 'data/gameboards/Rushhour6x6_3.csv'
 # Load all the vehicles
@@ -17,4 +18,4 @@ print(f'{board.vehicles[5].car}: COL {board.vehicles[5].coordinate_col}')
 # 1 beweging
 board.vehicles[1].move(1)
 # Deze print werkt niet meer
-board.print_board()
+# board.print_board()
