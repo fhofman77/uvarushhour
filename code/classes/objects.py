@@ -20,12 +20,12 @@ def initialize_cars(csv_input):
             for i in range(int(car.length)):
                 y = car.col
                 y += i
-                occupied_row_col.append([car.row, y])
+                occupied_row_col.append([car.car, car.row, y])
         else:
             for i in range(int(car.length)):
                 x = car.row
                 x += i
-                occupied_row_col.append([x, car.col])
+                occupied_row_col.append([car.car, x, car.col])
 
     return vehicles, occupied_row_col
 
