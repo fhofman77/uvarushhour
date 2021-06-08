@@ -89,7 +89,9 @@ class Car():
         self.coordinate_row = []
         self.coordinate_col = []
 
-    def move(self, distance):
+    def move(self, distance, board):
+        valid_move(distance, board)
+
         # If the car is moved, append to moves dictionairy
         if distance != 0:
             moves[self.car] = distance
@@ -122,7 +124,7 @@ class Car():
                 if car.row == self.row or self.row in car.coordinate_row:
                     if car is not self:
                         for value in car.coordinate_col:
-                            # If we move to the left
+                            # If we move to the left 
                             if distance < 0:
                                 # If the value of the car is in between the start and endpoint
                                 if end <= int(value) <= start:
