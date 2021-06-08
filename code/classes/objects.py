@@ -1,6 +1,7 @@
 import csv
 import re
 from code.visualisation.visualise import print_board
+from code.algorithms.random import random_move
 
 
 def initialize_cars(csv_input):
@@ -55,8 +56,12 @@ class Board():
     def size(self):
         return self.size
 
-    def winning_board(self):
+    def winning_board(self, board):
         """Add Desired End Board"""
+        if vehicles.col[-1] == board_size and vehicles.row[-1] == int(board_size/2):
+            return True
+        return False
+
         # Last car of the csv-input is completely on the right side means it's WON
         pass
 
@@ -66,15 +71,24 @@ class Board():
             moves[car.car] = distance
 
         """Still need to UPDATE BOARD && CHECK valid_move"""
-        new_position = car.col + distance
+        board = Board
+        if Car.valid_move(self, distance):
+            new_position = car.col + distance
+        else:
+            return
 
         # Move the car
         if car.orientation == 'H':
             car.col = new_position
             car.coordinate_col = [i + distance for i in car.coordinate_col]
+            if car.car == 'X':
+                print(f'test {car.col}')
+
+            print(f'{car.car} H car is moved')
         if car.orientation == 'V':
             car.row = new_position
             car.coordinate_row = [i + distance for i in car.coordinate_col]
+            print(f'{car.car} V car is moved')
 
     def print_board(self):
         return print_board(self.vehicles, self.size)
@@ -83,7 +97,7 @@ class Board():
         """Add current board (after moves made)"""
         pass
 
-    def won_game(self):
+    def won_game(self, board):
         """If end_board == current_board return true"""
         pass
 
@@ -104,7 +118,7 @@ class Car():
         self.coordinate_row = []
         self.coordinate_col = []
 
-    def valid_move(self, distance, board):
+    def valid_move(self, distance):
         if self.orientation == 'H':
             if distance < 0:
                 start = self.col
@@ -114,7 +128,7 @@ class Car():
             else:
                 start = self.col
                 end = self.col + distance + (self.length - 1)
-                if end > board.size:
+                if end > Board.size:
                     return False
 
             for car in board.vehicles:
@@ -152,12 +166,12 @@ class Car():
                 start = self.row
                 end = self.row + distance + (self.length - 1)
                 print(f'start: {start} End: {end}')
-                if end > board.size:
+                if end > Board.size:
                     print("Out of bottom")
                     return False
 
             # For each car on the board
-            for car in board.vehicles:
+            for car in Board.vehicles:
 
                 # If the car is in the same
                 if self.col in car.coordinate_col or self.col == car.col:
