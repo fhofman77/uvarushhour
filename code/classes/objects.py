@@ -53,8 +53,8 @@ class Board():
         self.vehicles, self.occupied_row_col = initialize_cars(
             inputdata)
 
-    def size(self):
-        return self.size
+    def size_function(self):
+        return int(self.size)
 
     def winning_board(self, board):
         """Add Desired End Board"""
@@ -72,7 +72,8 @@ class Board():
 
         """Still need to UPDATE BOARD && CHECK valid_move"""
         board = Board
-        if Car.valid_move(self, distance):
+
+        if self.valid_move(car, distance):
             new_position = car.col + distance
         else:
             return
@@ -80,9 +81,12 @@ class Board():
         # Move the car
         if car.orientation == 'H':
             car.col = new_position
-            car.coordinate_col = [i + distance for i in car.coordinate_col]
+            # car.coordinate_col = [i + distance for i in car.coordinate_col]
+            for i in car.coordinate_col:
+                new = i + distance
+                car.coordinate_col[i] = new
             if car.car == 'X':
-                print(f'test {car.col}')
+                print(f'test {car.coordinate_col}')
 
             print(f'{car.car} H car is moved')
         if car.orientation == 'V':
@@ -105,35 +109,23 @@ class Board():
         """if the current board == a past board after doing moves, it cant be the fastest so keep track of the past boards"""
         pass
 
-
-class Car():
-    def __init__(self, car, orientation, col, row, length):
-        # In the data the last car is the car that needs to escape
-        self.car = car
-        self.orientation = orientation
-        self.col = int(col)
-        self.row = int(row)
-        self.length = int(length)
-        self.moves = []
-        self.coordinate_row = []
-        self.coordinate_col = []
-
-    def valid_move(self, distance):
-        if self.orientation == 'H':
+    def valid_move(self, car, distance):
+        if car.orientation == 'H':
             if distance < 0:
-                start = self.col
-                end = self.col + distance
+                start = car.col
+                end = car.col + distance
                 if end < 1:
                     return False
             else:
-                start = self.col
-                end = self.col + distance + (self.length - 1)
-                if end > Board.size:
+                start = car.col
+                end = car.col + distance + (car.length - 1)
+                x = 6
+                if end > x:
                     return False
 
-            for car in board.vehicles:
-                if car.row == self.row or self.row in car.coordinate_row:
-                    if car is not self:
+            for car in self.vehicles:
+                if car.row == car.row or car.row in car.coordinate_row:
+                    if car is not car:
                         for value in car.coordinate_col:
                             # If we move to the left 
                             if distance < 0:
@@ -154,31 +146,30 @@ class Car():
         else:
             # Move up
             if distance < 0:
-                start = self.row + self.length - 1
-                end = self.row + distance
+                start = car.row + car.length - 1
+                end = car.row + distance
                 print(f'start: {start} End: {end}')
                 if end < 1:
-                    print("Out of topside Board")
+                    print("Out of topside self")
                     return False
 
             # Move down
             else:
-                start = self.row
-                end = self.row + distance + (self.length - 1)
+                start = car.row
+                end = car.row + distance + (car.length - 1)
                 print(f'start: {start} End: {end}')
-                if end > Board.size:
+                if end > self.size:
                     print("Out of bottom")
                     return False
 
-            # For each car on the board
-            for car in Board.vehicles:
+            # For each car on the self
+            for car in self.vehicles:
 
                 # If the car is in the same
-                if self.col in car.coordinate_col or self.col == car.col:
-                    print(car.car)
+                if car.col in car.coordinate_col or car.col == car.col:
                     # En het is niet deze auto
-                    if car is not self:
-                        print("not self")
+                    if car is not car:
+                        print("not car")
                         for value in car.coordinate_row:
                             # If we move to the top
                             if distance < 0:
@@ -193,9 +184,21 @@ class Car():
                             else:
                                 # If the value of the car is in between the start and endpoint
                                 if start <= value <= end:
-                                    print(
-                                        f'Moved bottom but {car.car} in the way')
+                                    print(f'Moved bottom but {car.car} in the way')
                                     return False
                                 else:
                                     print('Moved bottom good move')
                                     return True
+
+
+class Car():
+    def __init__(self, car, orientation, col, row, length):
+        # In the data the last car is the car that needs to escape
+        self.car = car
+        self.orientation = orientation
+        self.col = int(col)
+        self.row = int(row)
+        self.length = int(length)
+        self.moves = []
+        self.coordinate_row = []
+        self.coordinate_col = []
