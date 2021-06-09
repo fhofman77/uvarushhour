@@ -1,33 +1,38 @@
 import csv
 
-
-def print_board(vehicles, board_size):
+""" versie waar het object word meegegeven
+def print_board(occupied_row_col, board_size):
     for row in range(board_size):
         for col in range(board_size):
-            printed = False
-            for car in vehicles:
-                if car.orientation == 'H':
-                    for i in range(car.length):
-                        if car.coordinate_row[0] == row+1 and car.coordinate_col[i] == col+1:
-                            print(car.car, end=' ')
-                            printed = True
-                            continue
-                else:
-                    for i in range(car.length):
-                        if car.coordinate_row[i] == row+1 and car.coordinate_col[0] == col+1:
-                            print(car.car, end=' ')
-                            printed = True
-                            continue
-            if printed == False:
+            not_printed = True
+            for car in occupied_row_col:
+                if car[1] == row+1 and car[2] == col+1:
+                    print(car[0].car, end=' ')
+                    not_printed = False
+            
+            if not_printed:
                 print('# ', end='')
-                printed = True
-        print('', end='\n')
+                not_printed = False
+        print('')
+"""
 
-    # Beter om elke voor car een occupied spaces variabele aan te maken?
-    # Example: Car 1: occupied-row: [4], occupied col =[3,4,5]?
-    # Print car name if the row we are in == the occupied row of a car && col == occupied col
-    # Else print *
-    # Deze kunnen we dan ook gebruiken om te checken of een move kan
+""" versie waar car word meegegeven op de eerste plek """
+def print_board(occupied_row_col, board_size):
+    for row in range(board_size):
+        for col in range(board_size):
+            not_printed = True
+            for car in occupied_row_col:
+                if car[1] == row+1 and car[2] == col+1:
+                    print(car[0], end=' ')
+                    not_printed = False
+            
+            if not_printed:
+                print('# ', end='')
+                not_printed = False
+        print('')
+    
+
+
 
 
 def create_csv(moves):
