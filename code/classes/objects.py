@@ -55,26 +55,16 @@ class Board():
     def size(self):
         return self.size
 
-    def winning_board(self):
-        """Add Desired End Board"""
-        # Last car of the csv-input is completely on the right side means it's WON
-        pass
-
     def move_car(self, car, distance):
-        # If the car is moved, append to moves dictionairy
-        if distance != 0:
-            moves[car.car] = distance
+        """Change car.car to car"""
+        for item in self.occupied_row_col:
+            if item[0] == car.car and car.orientation == "H":
+                item[2] = item[2] + distance
+                moves[car.car] = distance
 
-        """Still need to UPDATE BOARD && CHECK valid_move"""
-        new_position = car.col + distance
-
-        # Move the car
-        if car.orientation == 'H':
-            car.col = new_position
-            car.coordinate_col = [i + distance for i in car.coordinate_col]
-        if car.orientation == 'V':
-            car.row = new_position
-            car.coordinate_row = [i + distance for i in car.coordinate_col]
+            if item[0] == car.car and car.orientation == "V":
+                item[1] = item[1] + distance
+                moves[car.car] = distance
 
     def print_board(self):
         return print_board(self.vehicles, self.size)
@@ -85,7 +75,17 @@ class Board():
 
     def won_game(self):
         """If end_board == current_board return true"""
-        pass
+        win_loc_x = np.ceil(size(self) / 2)
+        win_loc_y = size(self)
+
+        escape_car = self[-1]
+        if escape_car[0].car == 'X':
+            if escape_car[-2] == win_loc_x and escape_car[-1] == win_loc_y:
+                return True
+            else:
+                return False
+        else:
+            return False
 
     def past_board(self):
         """if the current board == a past board after doing moves, it cant be the fastest so keep track of the past boards"""
@@ -101,8 +101,6 @@ class Car():
         self.row = int(row)
         self.length = int(length)
         self.moves = []
-        self.coordinate_row = []
-        self.coordinate_col = []
 
     def valid_move(self, distance, board):
         if self.orientation == 'H':
