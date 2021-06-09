@@ -74,7 +74,7 @@ class Board():
         for item in self.occupied_row_col:
             # If a car from a board is in the same collumn
             if item[2] == car.col:
-                # If it is a different car and the cars collide, return False
+                # If it is a different car and the vehicles collide, return false
                 if item[0] is not car.car and ((startpoint <= item[1] <= endpoint) or (endpoint <= item[1] <= startpoint)):
                     return False
         else:
