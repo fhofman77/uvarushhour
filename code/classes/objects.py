@@ -2,6 +2,8 @@ import csv
 import re
 from code.visualisation.visualise import print_board
 from code.algorithms.random import random_move
+import numpy as np
+
 
 
 def initialize_cars(csv_input):
@@ -56,61 +58,79 @@ class Board():
     def size_function(self):
         return int(self.size)
 
-    def winning_board(self, board):
-        """Add Desired End Board"""
-        if vehicles.col[-1] == board_size and vehicles.row[-1] == int(board_size/2):
-            return True
-        return False
-
-        # Last car of the csv-input is completely on the right side means it's WON
-        pass
-
     def move_car(self, car, distance):
-        # If the car is moved, append to moves dictionairy
-        if distance != 0:
-            moves[car.car] = distance
+        """Change car.car to car"""
+        for item in self.occupied_row_col:
+            if item[0] == car.car and car.orientation == "H":
+                if self.valid_horizontal_move(car, item[2], item[2]+distance) == True:
+                    item[2] = item[2] + distance
+                    moves[car.car] = distance
 
-        """Still need to UPDATE BOARD && CHECK valid_move"""
-        board = Board
+            if item[0] == car.car and car.orientation == "V":
+                if self.valid_vertical_move(car, item[1], item[1]+distance) == True:
+                    item[1] = item[1] + distance
+                    moves[car.car] = distance
 
-        if self.valid_move(car, distance):
-            new_position = car.col + distance
+    def valid_vertical_move(self, car, startpoint, endpoint):
+        """Change to car instead of car.car"""
+        for item in self.occupied_row_col:
+            # If a car from a board is in the same collumn
+            if item[2] == car.col:
+                # If it is a different car and the vehicles collide, return false
+                if item[0] is not car.car and ((startpoint <= item[1] <= endpoint) or (endpoint <= item[1] <= startpoint)):
+                    return False
         else:
-            return
+            return True
 
-        # Move the car
-        if car.orientation == 'H':
-            car.col = new_position
-            # car.coordinate_col = [i + distance for i in car.coordinate_col]
-            for i in car.coordinate_col:
-                new = i + distance
-                car.coordinate_col[i] = new
-            if car.car == 'X':
-                print(f'test {car.coordinate_col}')
-
-            print(f'{car.car} H car is moved')
-        if car.orientation == 'V':
-            car.row = new_position
-            car.coordinate_row = [i + distance for i in car.coordinate_col]
-            print(f'{car.car} V car is moved')
+    def valid_horizontal_move(self, car, startpoint, endpoint):
+        """Change to car instead of car.car"""
+        for item in self.occupied_row_col:
+            # If the car from the board is in the same row
+            if item[1] == car.row:
+                # If the car is not the car, and the vehicles collide return false
+                if item[0] is not car.car and ((startpoint <= item[2] <= endpoint) or (endpoint <= item[2] <= startpoint)):
+                    return False
+        else:
+            return True
 
     def print_board(self):
-        return print_board(self.vehicles, self.size)
+        pass
 
     def current_board(self):
         """Add current board (after moves made)"""
+        return self.occupied_row_col
         pass
 
     def won_game(self, board):
         """If end_board == current_board return true"""
-        pass
+        win_loc_x = np.ceil(self.size(self) / 2)
+        win_loc_y = self.size(self)
+
+        escape_car = self[-1]
+        if escape_car[0].car == 'X':
+            if escape_car[-2] == win_loc_x and escape_car[-1] == win_loc_y:
+                return True
+            else:
+                return False
+        else:
+            return False
 
     def past_board(self):
         """if the current board == a past board after doing moves, it cant be the fastest so keep track of the past boards"""
         pass
 
-    def valid_move(self, car, distance):
-        if car.orientation == 'H':
+class Car():
+    def __init__(self, car, orientation, col, row, length):
+        # In the data the last car is the car that needs to escape
+        self.car = car
+        self.orientation = orientation
+        self.col = int(col)
+        self.row = int(row)
+        self.length = int(length)
+        self.moves = []
+
+    def valid_move(self, distance, board):
+        if self.orientation == 'H':
             if distance < 0:
                 start = car.col
                 end = car.col + distance
