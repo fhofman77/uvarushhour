@@ -58,19 +58,42 @@ class Board():
 
     def move_car(self, car, distance):
         """Change car.car to car"""
+        move_made = 0
         for item in self.occupied_row_col:
             if item[0] == car.car and car.orientation == "H":
-                if self.valid_horizontal_move(car, item[2], item[2]+distance) == True:
-                    item[2] = item[2] + distance
-                    moves[car.car] = distance
+                if self.valid_horizontal_move(car, item[2], item[2]+distance) == False:
+                    print("False move")
+                    return False
+            if item[0] == car.car and car.orientation == "V":
+
+                if self.valid_vertical_move(car, item[1], item[1]+distance) == False:
+                    print("False Move")
+                    return False
+
+        for item in self.occupied_row_col:
+            if item[0] == car.car and car.orientation == "H":
+                item[2] = item[2] + distance
+                moves[car.car] = distance
+                print("good move")
+                move_made += 1
 
             if item[0] == car.car and car.orientation == "V":
-                if self.valid_vertical_move(car, item[1], item[1]+distance) == True:
-                    item[1] = item[1] + distance
-                    moves[car.car] = distance
+                item[1] = item[1] + distance
+                moves[car.car] = distance
+                print("good move")
+                move_made += 1
+
+        if move_made > 0:
+            return True
+        else:
+            return False
+
+    def print(self):
+        return print_board(self.occupied_row_col, self.size)
 
     def valid_vertical_move(self, car, startpoint, endpoint):
-        """Change to car instead of car.car"""
+        if endpoint <= 0 or endpoint > self.size:
+            return False
         for item in self.occupied_row_col:
             # If a car from a board is in the same collumn
             if item[2] == car.col:
@@ -81,6 +104,9 @@ class Board():
             return True
 
     def valid_horizontal_move(self, car, startpoint, endpoint):
+        if endpoint <= 0 or endpoint > self.size:
+            return False
+
         """Change to car instead of car.car"""
         for item in self.occupied_row_col:
             # If the car from the board is in the same row
@@ -88,8 +114,8 @@ class Board():
                 # If the car is not the car, and the vehicles collide return false
                 if item[0] is not car.car and ((startpoint <= item[2] <= endpoint) or (endpoint <= item[2] <= startpoint)):
                     return False
-        else:
-            return True
+
+        return True
 
     def print_board(self):
         pass

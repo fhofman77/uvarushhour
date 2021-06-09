@@ -6,15 +6,19 @@ inputdata = 'data/gameboards/Rushhour6x6_3.csv'
 
 board = Board(inputdata)
 
-# Deze print werkt
+for car in board.occupied_row_col:
+    if car[0] == board.vehicles[1].car:
+        print(car)
+
+for car in board.occupied_row_col:
+    if car[0] == board.vehicles[1].car:
+        print(car)
+
+print("\n Now we move impossible 20 spots back down")
+board.move_car(board.vehicles[1], -2)
+for car in board.occupied_row_col:
+    if car[0] == board.vehicles[1].car:
+        print(car)
 
 
-for item in board.occupied_row_col:
-    if item[0] == board.vehicles[1].car:
-        print(item)
-
-
-board.valid_vertical_move(board.vehicles[1], 3, 5)
-print_board(board.occupied_row_col, board.size)
-
-print(moves)
+board.print()
