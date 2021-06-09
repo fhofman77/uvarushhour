@@ -59,25 +59,33 @@ class Board():
     def move_car(self, car, distance):
         """Change car.car to car"""
         for item in self.occupied_row_col:
-            if item[0] == car.car and car.orientation == "H" and self.valid_horizontal_move(car, item[2], item[2]+distance) == True:
-                item[2] = item[2] + distance
-                moves[car.car] = distance
+            if item[0] == car.car and car.orientation == "H":
+                if self.valid_horizontal_move(car, item[2], item[2]+distance) == True:
+                    item[2] = item[2] + distance
+                    moves[car.car] = distance
 
-            if item[0] == car.car and car.orientation == "V" and self.valid_vertical_move(car, item[1], item[1]+distance) == True:
-                item[1] = item[1] + distance
-                moves[car.car] = distance
+            if item[0] == car.car and car.orientation == "V":
+                if self.valid_vertical_move(car, item[1], item[1]+distance) == True:
+                    item[1] = item[1] + distance
+                    moves[car.car] = distance
 
     def valid_vertical_move(self, car, startpoint, endpoint):
+        """Change to car instead of car.car"""
         for item in self.occupied_row_col:
+            # If a car from a board is in the same collumn
             if item[2] == car.col:
+                # If it is a different car and the cars collide, return False
                 if item[0] is not car.car and ((startpoint <= item[1] <= endpoint) or (endpoint <= item[1] <= startpoint)):
                     return False
         else:
             return True
 
     def valid_horizontal_move(self, car, startpoint, endpoint):
+        """Change to car instead of car.car"""
         for item in self.occupied_row_col:
+            # If the car from the board is in the same row
             if item[1] == car.row:
+                # If the car is not the car, and the vehicles collide return false
                 if item[0] is not car.car and ((startpoint <= item[2] <= endpoint) or (endpoint <= item[2] <= startpoint)):
                     return False
         else:
