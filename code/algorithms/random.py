@@ -13,10 +13,9 @@ def possible_move(board):
 
 
 def random_move(board):
-    # moves are tracked by move funcion
-    # possbile_move = possible_moves(board)
-    board = copy.deepcopy(board)
+    # choose a random car to move
     car = random.choice(board.vehicles)
+    
     board.move_car(board.vehicles[-1], 1)
     print(board.vehicles[-1].car ,board.vehicles[-1].coordinate_col)
     number = random.randrange(int(-board.size), int(board.size))
