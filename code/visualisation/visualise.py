@@ -16,7 +16,7 @@ def print_board(occupied_row_col, board_size):
         print('')
 """
 
-""" versie waar car word meegegeven op de eerste plek
+""" versie waar car word meegegeven op de eerste plek """
 def print_board(occupied_row_col, board_size):
     for row in range(board_size):
         for col in range(board_size):
@@ -30,7 +30,6 @@ def print_board(occupied_row_col, board_size):
                 print('# ', end='')
                 not_printed = False
         print('')
-"""
     
 
 
