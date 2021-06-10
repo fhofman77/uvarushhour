@@ -9,15 +9,19 @@ def breath_algorithm(board):
 
     def all_states(board):
         original_board = copy.deepcopy(board)
-        end_board = 0
-        board.print()
-        all_states = {}
-        all_states['1'] = board.occupied_row_col
-        print(all_states)
-        board.move_car(board.vehicles[-1], -1)
-        all_states['else'] = board.occupied_row_col
-        print(all_states)
-        board.print()
+        states = {}
+        all_states = []
+        for last_state in all_states:
+            
+            for car in board.vehicles:
+                for distance in range(-board.size + 1, board.size - 1):
+                    if board.move_car(car, distance):
+                        board.print()
+                        all_states.append(board.occupied_row_col)
+                        last_state
+        # print(all_states)
+
+
 
         
         # for i in range(200):
@@ -31,6 +35,6 @@ def breath_algorithm(board):
         # print(all_states)
 
         board = original_board
-        return all_states, end_board
+        return all_states
     
     all_states(board)

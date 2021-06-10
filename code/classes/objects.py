@@ -1,9 +1,7 @@
 import csv
 import re
 from code.visualisation.visualise import print_board
-from code.algorithms.random import random_move
 import numpy as np
-
 
 
 def initialize_cars(csv_input):
@@ -23,12 +21,12 @@ def initialize_cars(csv_input):
             for i in range(int(car.length)):
                 y = car.col
                 y += i
-                occupied_row_col.append([car, car.row, y])
+                occupied_row_col.append([car.car, car.row, y])
         else:
             for i in range(int(car.length)):
                 x = car.row
                 x += i
-                occupied_row_col.append([car, x, car.col])
+                occupied_row_col.append([car.car, x, car.col])
 
     return vehicles, occupied_row_col
 
@@ -55,11 +53,21 @@ class Board():
         self.vehicles, self.occupied_row_col = initialize_cars(
             inputdata)
 
-    def size_function(self):
-        return int(self.size)
+    def size(self):
+        return self.size
 
     def move_car(self, car, distance):
         """Change car.car to car"""
+        move_made = 0
+        for item in self.occupied_row_col:
+            if item[0] == car.car and car.orientation == "H":
+                if self.valid_horizontal_move(car, item[2], item[2]+distance) == False:
+                    return False
+            if item[0] == car.car and car.orientation == "V":
+
+                if self.valid_vertical_move(car, item[1], item[1]+distance) == False:
+                    return False
+
         for item in self.occupied_row_col:
             if item[0] == car.car and car.orientation == "H":
                 item[2] = item[2] + distance
@@ -71,10 +79,10 @@ class Board():
                 moves[car.car] = distance
                 move_made += 1
 
-        if move_made > 0:
-            return True
-        else:
+        if move_made == 0:
             return False
+        else:
+            return True
 
     def print(self):
         return print_board(self.occupied_row_col, self.size)
@@ -122,97 +130,6 @@ class Board():
     def past_board(self):
         """if the current board == a past board after doing moves, it cant be the fastest so keep track of the past boards"""
         pass
-
-class Car():
-    def __init__(self, car, orientation, col, row, length):
-        # In the data the last car is the car that needs to escape
-        self.car = car
-        self.orientation = orientation
-        self.col = int(col)
-        self.row = int(row)
-        self.length = int(length)
-        self.moves = []
-
-    def valid_move(self, distance, board):
-        if self.orientation == 'H':
-            if distance < 0:
-                start = car.col
-                end = car.col + distance
-                if end < 1:
-                    return False
-            else:
-                start = car.col
-                end = car.col + distance + (car.length - 1)
-                x = 6
-                if end > x:
-                    return False
-
-            for car in self.vehicles:
-                if car.row == car.row or car.row in car.coordinate_row:
-                    if car is not car:
-                        for value in car.coordinate_col:
-                            # If we move to the left 
-                            if distance < 0:
-                                # If the value of the car is in between the start and endpoint
-                                if end <= int(value) <= start:
-                                    return False
-                                else:
-                                    return True
-                            # If we move to the right
-                            else:
-                                # If the value of the car is in between the start and endpoint
-                                if start <= value <= end:
-                                    return False
-                                else:
-                                    return True
-
-        # If the car is vertical
-        else:
-            # Move up
-            if distance < 0:
-                start = car.row + car.length - 1
-                end = car.row + distance
-                print(f'start: {start} End: {end}')
-                if end < 1:
-                    print("Out of topside self")
-                    return False
-
-            # Move down
-            else:
-                start = car.row
-                end = car.row + distance + (car.length - 1)
-                print(f'start: {start} End: {end}')
-                if end > self.size:
-                    print("Out of bottom")
-                    return False
-
-            # For each car on the self
-            for car in self.vehicles:
-
-                # If the car is in the same
-                if car.col in car.coordinate_col or car.col == car.col:
-                    # En het is niet deze auto
-                    if car is not car:
-                        print("not car")
-                        for value in car.coordinate_row:
-                            # If we move to the top
-                            if distance < 0:
-                                # If the value of the car is in between the start and endpoint
-                                if start <= value <= end:
-                                    print(f'{car.car} in the way')
-                                    return False
-                                else:
-                                    print('Moved top Good move')
-                                    return True
-                            # If we move to the bottom
-                            else:
-                                # If the value of the car is in between the start and endpoint
-                                if start <= value <= end:
-                                    print(f'Moved bottom but {car.car} in the way')
-                                    return False
-                                else:
-                                    print('Moved bottom good move')
-                                    return True
 
 
 class Car():
