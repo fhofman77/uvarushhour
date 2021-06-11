@@ -4,7 +4,7 @@ from code.algorithms.breath_first import breath_algorithm
 from code.visualisation.visualise import print_board
 from code.classes.objects import Board, moves, Car
 
-inputdata = 'data/gameboards/Rushhour6x6_2.csv'
+inputdata = 'data/gameboards/Rushhour6x6_1.csv'
 # Load all the vehicles
 
 board = Board(inputdata)
