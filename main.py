@@ -7,11 +7,5 @@ inputdata = 'data/gameboards/Rushhour6x6_2.csv'
 
 board = Board(inputdata)
 
-while not board.won_game():
-    random_move(board)
-    board.print()
- 
-
-print(moves)
-
-
+board.get_possible_moves()
+board.print()

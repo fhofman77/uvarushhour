@@ -2,6 +2,8 @@ import csv
 import re
 from code.visualisation.visualise import print_board
 import numpy as np
+import random
+import copy
 
 
 def initialize_cars(csv_input):
@@ -64,7 +66,6 @@ class Board():
                 if self.valid_horizontal_move(car, item[2], item[2]+distance) == False:
                     return False
             if item[0] == car.car and car.orientation == "V":
-
                 if self.valid_vertical_move(car, item[1], item[1]+distance) == False:
                     return False
 
@@ -79,9 +80,12 @@ class Board():
                 moves[car.car] = distance
                 move_made += 1
 
+        print(move_made)
         if move_made > 0:
+            print('True')
             return True
         else:
+            print('False')
             return False
 
     def print(self):
@@ -113,19 +117,31 @@ class Board():
 
         return True
 
+    def get_possible_moves(self):
+        current_board = self.occupied_row_col
+        possible_moves = []
+        for possible_move in range(-4, self.size-1):
+            current_board = 
+            print(possible_move)
+            for car in self.vehicles:
+                if current_board.move_car(car, possible_move) == True:
+                    print('car moved')
+                    possible_moves.append([car.car, possible_move])
+
+        print(possible_moves)
+
     def current_board(self):
         """Add current board (after moves made)"""
         return self.occupied_row_col
         pass
 
     def won_game(self):
-            """If end_board == current_board return true"""
-            escape_car = self.occupied_row_col[-1]
-            if escape_car[2] == 6:
-                return True
-            else:
-                return False 
-
+        """If end_board == current_board return true"""
+        escape_car = self.occupied_row_col[-1]
+        if escape_car[2] == 6:
+            return True
+        else:
+            return False
 
     def past_board(self):
         """if the current board == a past board after doing moves, it cant be the fastest so keep track of the past boards"""
