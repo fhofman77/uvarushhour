@@ -1,40 +1,51 @@
 import queue
-import random
 import copy
 
 def breath_algorithm(board):
-    def solver(new_state):
+
+    def child_states(board):
+        children = []
+        print(f'this is board {board}')
+        board = board[1]
+        for car in board.vehicles:
+            for distance in range(-board.size + 1, board.size - 1):
+                current_board = copy.deepcopy(board)
+                if distance == 0:
+                    continue
+                if current_board.move_car(car, distance):
+                    print('good')
+                    current_board.print()
+                    route = [board, current_board, car.car, distance]
+                    children.append(route)
+
+            print(car.car)
+        print(children)
+
+        return children
+
+    def solver(board):
         que = queue.Queue()
-        que.put(new_state)
+        visited = []
+        que.put([0, board])
 
-    def all_states(board):
-        original_board = copy.deepcopy(board)
-        states = {}
-        all_states = []
-        for last_state in all_states:
-            
-            for car in board.vehicles:
-                for distance in range(-board.size + 1, board.size - 1):
-                    if board.move_car(car, distance):
-                        board.print()
-                        all_states.append(board.occupied_row_col)
-                        last_state
-        # print(all_states)
+        while not que.empty():
+            next_board = que.get()
+            # next_board = object_list.keys
+            print(next_board)
+            children = child_states(next_board)
+            for child in children:
+                print(f'child {child}')
+                print(f'visited {visited}')
+                print(child not in visited)
+                if child not in visited:
+                    que.put(children)
+                    visited.append(children)
+                    print(f'test: {que}')
+                else:
+                    print('not')
+        return
 
-
-
-        
-        # for i in range(200):
-            
-        #     if board not in all_states:
-        #         print(board.occupied_row_col)
-        #         all_states.append(board)
-        #         if board.won_game():
-        #             end_board = board
-        
-        # print(all_states)
-
-        board = original_board
-        return all_states
     
-    all_states(board)
+    solver(board)
+
+

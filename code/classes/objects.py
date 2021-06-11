@@ -79,10 +79,21 @@ class Board():
                 moves[car.car] = distance
                 move_made += 1
 
-        if move_made == 0:
-            return False
-        else:
+        if move_made > 0:
             return True
+        else:
+            return False
+    
+    def get_possible_moves(self):
+        current_board = self.occupied_row_col
+        possible_moves = []
+        for possible_move in range(-4, self.size-1):
+            print(possible_move)
+            for car in self.vehicles:
+                if current_board.move_car(car, possible_move) == True:
+                    print('car moved')
+                    possible_moves.append([car.car, possible_move])
+        print(possible_moves)
 
     def print(self):
         return print_board(self.occupied_row_col, self.size)

@@ -16,6 +16,16 @@ board = Board(inputdata)
 #     board.print()
  
 
-print(moves)
+# print(moves)
 
 breath_algorithm(board)
+
+# board.move_car(board.vehicles[0], -1)
+# board.print()
+# board.move_car(board.vehicles[0], -1)
+# board.print()
+# board.move_car(board.vehicles[-1], -1)
+# board.print()
+# board.move_car(board.vehicles[-1], -1)
+# board.print()
+
