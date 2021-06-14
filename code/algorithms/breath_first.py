@@ -19,6 +19,7 @@ def breath_algorithm(board):
         que = queue.Queue()
         visited = []
         que.put([board, board])
+        all_states = []
 
         while not que.empty():
             temp = que.get()
@@ -28,10 +29,18 @@ def breath_algorithm(board):
             children = child_states(next_board[0])
             for child in children:
                 if child[0].won_game():
-                    return
+                    print('won')
+                    all_states.append(child)
+                    # return
                 if child[0].occupied_row_col not in visited:
                     que.put(child)
                     visited.append(child[0].occupied_row_col)
+                    all_states.append(child)
+
+        
+        print(all_states[-1])
+            
+            
  
         return
 
