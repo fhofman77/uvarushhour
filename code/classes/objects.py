@@ -60,46 +60,29 @@ class Board():
         """Change car.car to car"""
         move_made = 0
         for item in self.occupied_row_col:
-            # print(car.orientation)
             if item[0] == car.car and car.orientation == "H":
-                # print('orientation is horizontal')
-                if self.valid_horizontal_move(car, item[2], item[2]+distance):
-                    item[2] = item[2] + distance
-                    moves[car.car] = distance
-                    print(f'this is item2 + distance: {car.car, item[2], distance}')
-                    return True
+                if self.valid_horizontal_move(car, item[2], item[2]+distance) == False:
+                    return False
             if item[0] == car.car and car.orientation == "V":
-                if self.valid_vertical_move(car, item[1], item[1]+distance):
-                    item[1] = item[1] + distance
-                    moves[car.car] = distance
-                    move_made += 1
-                    return True
 
+                if self.valid_vertical_move(car, item[1], item[1]+distance) == False:
+                    return False
 
-        # for item in self.occupied_row_col:
-        #     if item[0] == car.car and car.orientation == "H":
-                
+        for item in self.occupied_row_col:
+            if item[0] == car.car and car.orientation == "H":
+                item[2] = item[2] + distance
+                moves[car.car] = distance
+                move_made += 1
 
-        #     if item[0] == car.car and car.orientation == "V":
-        #         item[1] = item[1] + distance
-        #         moves[car.car] = distance
-        #         move_made += 1
+            if item[0] == car.car and car.orientation == "V":
+                item[1] = item[1] + distance
+                moves[car.car] = distance
+                move_made += 1
 
-        # if move_made > 0:
-        #     return True
-        # else:
-        #     return False
-    
-    def get_possible_moves(self):
-        current_board = self.occupied_row_col
-        possible_moves = []
-        for possible_move in range(-4, self.size-1):
-            print(possible_move)
-            for car in self.vehicles:
-                if current_board.move_car(car, possible_move) == True:
-                    print('car moved')
-                    possible_moves.append([car.car, possible_move])
-        print(possible_moves)
+        if move_made > 0:
+            return True
+        else:
+            return False
 
     def print(self):
         return print_board(self.occupied_row_col, self.size)
@@ -117,7 +100,7 @@ class Board():
             return True
 
     def valid_horizontal_move(self, car, startpoint, endpoint):
-        if endpoint <= 1 or endpoint > self.size:
+        if endpoint <= 0 or endpoint > self.size:
             return False
 
         """Change to car instead of car.car"""
