@@ -43,18 +43,24 @@ def breath_algorithm(board):
     
     solution = []
     all_states = solver(board)
-        
     last_state = all_states.pop(-1)
-    while last_state[1].occupied_row_col != board.occupied_row_col:
+    loop = True
+    # while last_state[1].occupied_row_col != board.occupied_row_col:
+    while loop:
         solution.append([last_state[2], last_state[3]])
+        if last_state[1].occupied_row_col == board.occupied_row_col:
+            solution.reverse()
+            solution.insert(0, ['car', 'move'])
+            print(solution)
+            return(solution)
         for state in all_states:
             if last_state[1] == state[0]:
                 last_state = state
+
     
-    solution.reverse()
-    print(solution)
-    solution.insert(0, ['car', 'move'])
-    return(solution)
+
+
+
 
 
 def dfs_algorithm(board):
