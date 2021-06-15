@@ -16,9 +16,8 @@ def print_board(occupied_row_col, board_size):
         print('')
             
 
-def create_csv(moves):
+def create_csv(moves, algorithm, board):
     """Creates a CSV file from all the moves that have been added to a dict"""
-    with open(f'data/output/output{moves}.csv', 'w') as csv_file:
+    with open(f'data/output/output: {algorithm}, board: {board}.csv', 'w') as csv_file:
         writer = csv.writer(csv_file)
         writer.writerows(moves)
-        
