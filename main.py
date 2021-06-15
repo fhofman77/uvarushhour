@@ -1,6 +1,6 @@
 
 from code.algorithms.random import random_move
-from code.algorithms.breath_first import breath_algorithm
+from code.algorithms.breath_first import breath_algorithm, depth_algorithm
 from code.visualisation.visualise import print_board, create_csv
 from code.classes.objects import Board, moves, Car
 import copy, time
@@ -9,12 +9,14 @@ inputdata = 'data/gameboards/Rushhour6x6_1.csv'
 
 board = Board(inputdata)
 
-moves = breath_algorithm(board)
-algorithm = 'breath'
-board = 'Rushhour6x6_1'
+depth_algorithm(board)
+
+# moves = breath_algorithm(board)
+# algorithm = 'breath'
+# board = 'Rushhour6x6_1'
 
 
-create_csv(moves, algorithm, board)
+# create_csv(moves, algorithm, board)
 
 # while not board.won_game():
 #     random_move(board)

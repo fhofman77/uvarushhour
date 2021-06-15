@@ -56,8 +56,39 @@ def breath_algorithm(board):
         for state in all_states:
             if last_state[1] == state[0]:
                 last_state = state
-
+                
+def depth_algorithm(board):
+    def child_states(board):
+        children = []
+        for car in board.vehicles:
+            for distance in range(-board.size + 1, board.size):
+                if distance != 0:
+                    child_board = copy.deepcopy(board)
+                    if child_board.move_car(car, distance):
+                        route = [child_board, board, car.car, distance]
+                        children.append(route)
     
+        return children
+    
+    def solver(board):
+        visited = []
+        loop = True
+        alternatives = [child_states(board)]
+        while loop:
+            next_board = ((alternatives[-1])[-1])[0]
+            print(len(alternatives))
+            if next_board.occupied_row_col in visited:
+                next_board = ((alternatives.pop(-1))[-1])[0]
+            if next_board.won_game():
+                print('won')
+                return
+            else:
+                print('test')
+                visited.append(next_board.occupied_row_col)
+                alternatives.append(child_states(next_board))
+            
+    
+    solver(board)
 
 
 
