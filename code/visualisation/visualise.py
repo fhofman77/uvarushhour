@@ -20,5 +20,5 @@ def create_csv(moves):
     """Creates a CSV file from all the moves that have been added to a dict"""
     with open(f'data/output/output{moves}.csv', 'w') as csv_file:
         writer = csv.writer(csv_file)
-        for key, value in moves.items():
-            writer.writerow([key, value])
+        writer.writerows(moves)
+        

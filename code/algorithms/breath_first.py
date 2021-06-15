@@ -7,9 +7,9 @@ def breath_algorithm(board):
         for car in board.vehicles:
             for distance in range(-board.size + 1, board.size):
                 if distance != 0:
-                    current_board = copy.deepcopy(board)
-                    if current_board.move_car(car, distance):
-                        route = [current_board, board, car.car, distance]
+                    child_board = copy.deepcopy(board)
+                    if child_board.move_car(car, distance):
+                        route = [child_board, board, car.car, distance]
                         children.append(route)
 
         return children
@@ -22,7 +22,8 @@ def breath_algorithm(board):
 
         while not que.empty():
             temp = que.get()
-            if que.qsize != 1:
+            print(que.qsize())
+            if que.qsize() != 1:
                 next_board = temp[0]
             next_board = temp
             children = child_states(next_board[0])
@@ -30,21 +31,31 @@ def breath_algorithm(board):
                 if child[0].won_game():
                     print('won')
                     all_states.append(child)
-                    # return
+                    return all_states
                 if child[0].occupied_row_col not in visited:
                     que.put(child)
                     visited.append(child[0].occupied_row_col)
                     all_states.append(child)
 
-        
-        print(all_states[-1])
-            
-            
  
+        print('Could not find solution')
         return
-
     
-    solver(board)
+    solution = []
+    all_states = solver(board)
+        
+    last_state = all_states.pop(-1)
+    while last_state[1].occupied_row_col != board.occupied_row_col:
+        solution.append([last_state[2], last_state[3]])
+        for state in all_states:
+            if last_state[1] == state[0]:
+                last_state = state
+    
+    solution.reverse()
+    print(solution)
+    solution.insert(0, ['car', 'move'])
+    return(solution)
+
 
 def dfs_algorithm(board):
     def dfs_states(board):
