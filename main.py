@@ -1,9 +1,9 @@
+
 from code.algorithms.random import random_move
 from code.algorithms.breath_first import breath_algorithm
 from code.visualisation.visualise import print_board, create_csv
 from code.classes.objects import Board, moves, Car
 import copy, time
-
 inputdata = 'data/gameboards/Rushhour6x6_2.csv'
 # Load all the vehicles
 
@@ -59,5 +59,4 @@ create_csv(moves, algorithm, board)
 # board.print()
 # board.move_car(board.vehicles[-1], -1)
 # board.print()
-
 

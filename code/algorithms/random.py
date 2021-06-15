@@ -1,12 +1,8 @@
 import random
-import copy
-# from code.classes import objects
 
 """ 
 Contains the algorithems for solving the rushhour puzzle
 """
-
-
 
 def random_move(board):
     # choose a random car to move
@@ -17,7 +13,3 @@ def random_move(board):
     else:
         number = -number
     board.move_car(car, number)
-
-# try:
-    #     board.move_car(board.vehicles[-1], 1)
-    # except:
