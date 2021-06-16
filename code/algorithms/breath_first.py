@@ -22,7 +22,7 @@ def breath_algorithm(board):
 
         while not que.empty():
             temp = que.get()
-            print(que.qsize())
+            # print(que.qsize())
             if que.qsize() != 1:
                 next_board = temp[0]
             next_board = temp
