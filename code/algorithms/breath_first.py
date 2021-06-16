@@ -76,15 +76,18 @@ def depth_algorithm(board):
         alternatives = [child_states(board)]
         while loop:
             next_board = ((alternatives[-1])[-1])[0]
+            # print(f'first {next_board}')
             print(len(alternatives))
-            if next_board.occupied_row_col in visited:
+            while next_board.occupied_row_col in visited:
                 next_board = ((alternatives.pop(-1))[-1])[0]
+                # print(next_board)
             if next_board.won_game():
                 print('won')
                 return
             else:
-                print('test')
+                # print(f'visited {visited}')
                 visited.append(next_board.occupied_row_col)
+                # print(f'child states {child_states(next_board)}')
                 alternatives.append(child_states(next_board))
             
     

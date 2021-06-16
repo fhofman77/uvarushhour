@@ -9,14 +9,14 @@ inputdata = 'data/gameboards/Rushhour6x6_1.csv'
 
 board = Board(inputdata)
 
-# depth_algorithm(board)
+depth_algorithm(board)
 
-moves = breath_algorithm(board)
-algorithm = 'breath'
-board = 'Rushhour6x6_1'
+# moves = breath_algorithm(board)
+# algorithm = 'breath'
+# board = 'Rushhour6x6_1'
 
 
-create_csv(moves, algorithm, board)
+# create_csv(moves, algorithm, board)
 
 # while not board.won_game():
 #     random_move(board)
