@@ -23,11 +23,7 @@ def breath_algorithm(board):
         all_states = []
 
         while not que.empty():
-            temp = que.get()
-            # print(que.qsize())
-            if que.qsize() != 1:
-                next_board = temp[0]
-            next_board = temp
+            next_board = que.get()
             children = child_states(next_board[0])
             for child in children:
                 if child[0].won_game():
@@ -81,11 +77,7 @@ def depth_algorithm(board):
         all_states = []
 
         while not que.empty():
-            temp = que.get()
-            # print(que.qsize())
-            if que.qsize() != 1:
-                next_board = temp[-1]
-            next_board = temp
+            next_board = que.get()
             children = child_states(next_board[0])
             for child in children:
                 if child[0].won_game():
