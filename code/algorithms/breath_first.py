@@ -61,6 +61,7 @@ def BFS_DFS(board, search_method):
             if last_state[1] == state[0]:
                 last_state = state
 
+"""
 # test of itterative deepening
 def iterative_deepening(board):
     def child_states(board):
@@ -116,3 +117,4 @@ def iterative_deepening(board):
                 last_state = state
 
     solver(board)
+"""

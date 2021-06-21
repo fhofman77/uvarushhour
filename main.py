@@ -9,8 +9,7 @@ inputdata = 'data/gameboards/Rushhour6x6_1.csv'
 # Load all the vehicles
 
 board = Board(inputdata)
-# BFS_DFS(board, 'b')
-iterative_deepening(board)
+BFS_DFS(board, 'd')
 
 # moves = breath_algorithm(board)
 # algorithm = 'breath'
