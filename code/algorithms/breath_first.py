@@ -68,33 +68,51 @@ def iterative_deepening(board):
         for car in board.vehicles:
             for distance in range(-board.size + 1, board.size):
                 if distance != 0:
-                    current_board = copy.deepcopy(board)
-                    if current_board.move_car(car, distance):
-                        children.append(board)
+                    child_board = copy.deepcopy(board)
+                    if child_board.move_car(car, distance):
+                        route = [child_board, board, car.car, distance]
+                        children.append(route)
 
         return children
 
-    def dls_search(board, depth):
-        queue = [[board]]
-        seen_states = set()
+    def solver(board):
+        que = queue.LifoQueue()
+        visited = []
+        que.put([board, board])
+        all_states = []
         counter = 0
-        while queue or counter < depth:
-            path = queue.pop()
-            if path[-1].won_game():
-                return True
 
-            for next_state in child_states(path[-1]):
-                if next_state not in seen_states:
-                    seen_states.add(next_state)
-                    queue.append(path + [next_state])
+        while not que.empty() and counter < 300:
+            next_board = que.get()
+            children = child_states(next_board[0])
+            counter+=1
+            for child in children:
+                if child[0].won_game():
+                    print('won')
+                    all_states.append(child)
+                    return all_states
+                if child[0].occupied_row_col not in visited:
+                    que.put(child)
+                    visited.append(child[0].occupied_row_col)
+                    all_states.append(child)
 
-            counter += 1
+        print('Could not find solution')
+        return
 
-        return 
-    
-    def iddfs(board):
-        max_depth = 50
-        for depth in range(max_depth):
-            return dls_search(board, depth)
+    solution = []
+    all_states = solver(board)
+    last_state = all_states.pop(-1)
+    loop = True
+    # while last_state[1].occupied_row_col != board.occupied_row_col:
+    while loop:
+        solution.append([last_state[2], last_state[3]])
+        if last_state[1].occupied_row_col == board.occupied_row_col:
+            solution.reverse()
+            solution.insert(0, ['car', 'move'])
+            print(solution)
+            return(solution)
+        for state in all_states:
+            if last_state[1] == state[0]:
+                last_state = state
 
-    iddfs(board)
+    solver(board)
