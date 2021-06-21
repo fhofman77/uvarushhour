@@ -9,7 +9,7 @@ inputdata = 'data/gameboards/Rushhour6x6_1.csv'
 # Load all the vehicles
 
 board = Board(inputdata)
-BFS_DFS(board, 'B')
+BFS_DFS(board, 'b')
 
 # moves = breath_algorithm(board)
 # algorithm = 'breath'

@@ -46,7 +46,7 @@ def BFS_DFS(board, search_method):
         return
 
     solution = []
-    all_states = solver(board)
+    all_states = solver(board, search_method)
     last_state = all_states.pop(-1)
     loop = True
     # while last_state[1].occupied_row_col != board.occupied_row_col:
@@ -60,3 +60,41 @@ def BFS_DFS(board, search_method):
         for state in all_states:
             if last_state[1] == state[0]:
                 last_state = state
+
+# test of itterative deepening
+def iterative_deepening(board):
+    def child_states(board):
+        children = []
+        for car in board.vehicles:
+            for distance in range(-board.size + 1, board.size):
+                if distance != 0:
+                    current_board = copy.deepcopy(board)
+                    if current_board.move_car(car, distance):
+                        children.append(board)
+
+        return children
+
+    def dls_search(board, depth):
+        queue = [[board]]
+        seen_states = set()
+        counter = 0
+        while queue or counter < depth:
+            path = queue.pop()
+            if path[-1].won_game():
+                return True
+
+            for next_state in child_states(path[-1]):
+                if next_state not in seen_states:
+                    seen_states.add(next_state)
+                    queue.append(path + [next_state])
+
+            counter += 1
+
+        return 
+    
+    def iddfs(board):
+        max_depth = 50
+        for depth in range(max_depth):
+            return dls_search(board, depth)
+
+    iddfs(board)
