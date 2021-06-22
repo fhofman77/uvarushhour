@@ -1,15 +1,15 @@
 
 from code.algorithms.random import random_move
-from code.algorithms.breath_first import BFS_DFS, iterative_deepening
+from code.algorithms.breath_first import BFS_DFS
 from code.visualisation.visualise import print_board, create_csv
 from code.classes.objects import Board, moves, Car
 import copy
 import time
-inputdata = 'data/gameboards/Rushhour6x6_1.csv'
+inputdata = 'data/gameboards/Rushhour9x9_4.csv'
 # Load all the vehicles
 
 board = Board(inputdata)
-BFS_DFS(board, 'd')
+BFS_DFS(board, 'b')
 
 # moves = breath_algorithm(board)
 # algorithm = 'breath'
