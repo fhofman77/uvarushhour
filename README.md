@@ -1,2 +1,4 @@
-# uvarushhour
-Assignment repository for the minor programming at the UVA
+# UvA Rushhour Algorithms
+## FEFAMA
+### Breadth-First, Depth-First & Random
+# Description
