@@ -3,6 +3,8 @@
 # Description
 
 The goal of this project was to find moves used to finish a game of Rush Hour. Rush Hour is a well known game, in which certain car needs to exit the field on the right side. However, other cars are in the way. Cars can only move in the oriëntation in which they set on the field. The algorithm worked on the principle of moving cars, but only if this move would result in a board-state (the way the cars are on the field) was not seen before.
+![Image of what a board could look like](https://user-images.githubusercontent.com/70511386/122947786-b8831000-d37a-11eb-9ccc-5ed741d6cb63.png)
+
 ## Breadth First
 The Breadth first algorithm was used to fulfill the main goal of this project, to win the game, with the least amount of moves. It was not the fastest in terms of time, as it would branch out from the original board state, to all possible board states within 1 move (child board states), before moving to the children of these new board states. While this takes more time, it would always result in the solution with the least amount of moves possible, as it would traverse the 'board-states' tree horizontally first.
 
