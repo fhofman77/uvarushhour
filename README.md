@@ -24,3 +24,7 @@ The depth first algorithm would continue on the first found child board state as
 
 ## Random
 As the name suggests, this algorithm takes a random car from the board, and performs a random legal move. While over time this will almost always lead to a game being won, the amount of moves that are made is left totally to chance. Solutions of this algorithm differ alot in terms of the amount of moves it takes to win, however the runtime of this algorithm is still very quick, as it consists of just a few lines of code and no remembering of whole board states.
+
+
+
+<sub><sup>By: Felix Blom, Frank Hofman & Merrin Maas</sup></sub>
