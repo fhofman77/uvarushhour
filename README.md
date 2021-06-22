@@ -3,6 +3,7 @@
 # Description
 
 The goal of this project was to find moves used to finish a game of Rush Hour. Rush Hour is a well known game, in which certain car needs to exit the field on the right side. However, other cars are in the way. Cars can only move in the oriëntation in which they set on the field. The algorithm worked on the principle of moving cars, but only if this move would result in a board-state (the way the cars are on the field) was not seen before.
+
 <img src="https://user-images.githubusercontent.com/70511386/122947786-b8831000-d37a-11eb-9ccc-5ed741d6cb63.png" alt="Image of what a board could look like" width="200"/>
 
 ## Breadth First
