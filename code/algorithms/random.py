@@ -1,7 +1,7 @@
 import random
 
 """ 
-Contains the algorithems for solving the rushhour puzzle
+Contains the random algorithm for solving the rushhour puzzle
 """
 
 def random_move(board):
@@ -12,4 +12,5 @@ def random_move(board):
         number = number 
     else:
         number = -number
-    board.move_car(car, number)
+    if board.move_car(car, number):
+        return [car.car, number]
