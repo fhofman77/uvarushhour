@@ -1,7 +1,7 @@
 from code.algorithms.random import random_move
 from code.algorithms.breadth_depth import BFS_DFS
 from code.visualisation.visualise import create_csv
-from code.classes.objects import Board, moves
+from code.classes.objects import Board
 
 inputdata = 'data/gameboards/Rushhour6x6_1.csv'
 board = Board(inputdata)

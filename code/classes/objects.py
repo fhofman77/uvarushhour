@@ -3,8 +3,11 @@ import re
 from code.visualisation.visualise import print_board
 import numpy as np
 
-
+"""
+Loads the board from the csv file
+"""
 def initialize_cars(csv_input):
+    # read and store vehicle information from file in correct order
     vehicles = []
     with open(csv_input, newline='') as gamefile:
         rows = csv.reader(gamefile, delimiter=',')
@@ -13,8 +16,7 @@ def initialize_cars(csv_input):
             vehicle = Car(row[0], row[1], row[2], row[3], row[4])
             vehicles.append(vehicle)
 
-    # Printen misschien beter in een andere functie
-    # Dit werkt nu niet voor boards met een andere size dan 6, ook klopt de logica niet
+    # creats the occupied rows and columns of the board based on orientation and length
     occupied_row_col = []
     for car in vehicles:
         if car.orientation == 'H':
@@ -31,9 +33,9 @@ def initialize_cars(csv_input):
     return vehicles, occupied_row_col
 
 
-moves = {
-    'car': 'move'
-}
+# moves = {
+#     'car': 'move'
+# }
 
 
 def get_board_size(inputdata):
@@ -71,12 +73,12 @@ class Board():
         for item in self.occupied_row_col:
             if item[0] == car.car and car.orientation == "H":
                 item[2] = item[2] + distance
-                moves[car.car] = distance
+                # moves[car.car] = distance
                 move_made += 1
 
             if item[0] == car.car and car.orientation == "V":
                 item[1] = item[1] + distance
-                moves[car.car] = distance
+                # moves[car.car] = distance
                 move_made += 1
 
         if move_made > 0:

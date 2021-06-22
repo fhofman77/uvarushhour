@@ -1,10 +1,9 @@
 import random
 
-""" 
-Contains the random algorithm for solving the rushhour puzzle
-"""
-
 def random_move(board):
+    """ 
+    Contains the random algorithm for solving the rushhour puzzle
+    """
     # choose a random car to move
     car = random.choice(board.vehicles)
     number = random.randrange(1, board.size-1)
