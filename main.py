@@ -6,16 +6,18 @@ from code.classes.objects import Board
 inputdata = 'data/gameboards/Rushhour6x6_1.csv'
 board = Board(inputdata)
 
-# algorithm = 'breadth'
-# moves = BFS_DFS(board, algorithm)
+algorithm = input('Choose an algorithm: breadth, depth or random\n')
 game = (inputdata.split('/'))[-1]
 
-# create_csv(moves, algorithm, game)
-
-algorithm = 'random'
-moves = []
-while not board.won_game():
-    move = random_move(board)
-    if move:
-        moves.append(move)
-create_csv(moves, algorithm, game)
+if algorithm == 'breadth' or algorithm == 'depth':
+    moves = BFS_DFS(board, algorithm)
+    create_csv(moves, algorithm, game)
+elif algorithm == 'random':
+    moves = []
+    while not board.won_game():
+        move = random_move(board)
+        if move:
+            moves.append(move)
+    create_csv(moves, algorithm, game)
+else:
+    print('Choose a correct algorithm: breadth, depth or random')
