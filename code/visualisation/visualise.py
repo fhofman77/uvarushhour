@@ -1,8 +1,10 @@
 
 import csv
 
-""" versie waar car word meegegeven op de eerste plek """
 def print_board(occupied_row_col, board_size):
+    """
+    Function that can print the board
+    """
     for row in range(board_size):
         for col in range(board_size):
             not_printed = True
@@ -18,7 +20,9 @@ def print_board(occupied_row_col, board_size):
             
 
 def create_csv(moves, algorithm, board):
-    """Creates a CSV file from all the moves that have been added to a dict"""
+    """
+    Creates a CSV file from all the moves that have been added to a dict
+    """
     with open(f'data/output/output: {algorithm}, board: {board}.csv', 'w') as csv_file:
         writer = csv.writer(csv_file)
         writer.writerows(moves)

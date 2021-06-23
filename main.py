@@ -3,6 +3,7 @@ from code.algorithms.breadth_depth import BFS_DFS
 from code.visualisation.visualise import create_csv
 from code.classes.objects import Board
 
+# Choose a gameboard.
 inputdata = 'data/gameboards/Rushhour6x6_1.csv'
 board = Board(inputdata)
 

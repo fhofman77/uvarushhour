@@ -101,7 +101,7 @@ class Board():
 
     def valid_horizontal_move(self, car, startpoint, endpoint):
         """
-        checks if a horizontal move is possible
+         Checks if a horizontal move is possible
         """
         if endpoint <= 0 or endpoint > self.size:
             return False
@@ -117,7 +117,9 @@ class Board():
         return True
 
     def won_game(self):
-        """If end_board == current_board return true"""
+        """
+        If end_board == current_board return true
+        """
         escape_car = self.occupied_row_col[-1]
         if escape_car[2] == 6:
             return True
@@ -126,7 +128,6 @@ class Board():
 
 class Car():
     def __init__(self, car, orientation, col, row, length):
-        # In the data the last car is the car that needs to escape
         self.car = car
         self.orientation = orientation
         self.col = int(col)
