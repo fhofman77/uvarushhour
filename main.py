@@ -2,6 +2,7 @@ from code.algorithms.random import random_move
 from code.algorithms.breadth_depth import BFS_DFS
 from code.visualisation.visualise import create_csv
 from code.classes.objects import Board
+import sys
 
 # Choose a gameboard.
 inputdata = 'data/gameboards/Rushhour6x6_1.csv'
@@ -14,11 +15,13 @@ if algorithm == 'breadth' or algorithm == 'depth':
     moves = BFS_DFS(board, algorithm)
     create_csv(moves, algorithm, game)
 elif algorithm == 'random':
+    sys.stdout.write('\rloading...')
     moves = []
     while not board.won_game():
         move = random_move(board)
         if move:
             moves.append(move)
+    sys.stdout.write('\rDone!     \n')
     create_csv(moves, algorithm, game)
 else:
     print('Choose a correct algorithm: breadth, depth or random')

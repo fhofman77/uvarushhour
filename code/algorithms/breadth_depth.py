@@ -1,5 +1,4 @@
-import queue
-import copy
+import queue, copy, sys
 
 
 def BFS_DFS(board, search_method):
@@ -40,15 +39,16 @@ def BFS_DFS(board, search_method):
         que.put([board, board])
         all_states = []
 
+        sys.stdout.write('\rloading...')
+
         # keep running wile the que is not empty
         while not que.empty():
-            print(que.qsize())
             next_board = que.get()
             children = child_states(next_board[0])
             for child in children:
                 # take the first state in que and check if it has won
                 if child[0].won_game():
-                    print('won')
+                    sys.stdout.write('\rDone!    \n')
                     all_states.append(child)
                     return all_states
                 # if not won and the state the state not in visited the child state is set in the que and is visited
@@ -57,6 +57,7 @@ def BFS_DFS(board, search_method):
                     visited.append(child[0].occupied_row_col)
                     all_states.append(child)
 
+        sys.stdout.write('\rDone!     \n')
         print('Could not find solution')
         return
 
@@ -71,7 +72,6 @@ def BFS_DFS(board, search_method):
         if last_state[1].occupied_row_col == board.occupied_row_col:
             solution.reverse()
             solution.insert(0, ['car', 'move'])
-            print(solution)
             return(solution)
         # Look for the parent state in all states so the next itteration the move can be saved
         for state in all_states:
