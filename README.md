@@ -26,5 +26,10 @@ The depth first algorithm would continue on the first found child board state as
 As the name suggests, this algorithm takes a random car from the board, and performs a random legal move. While over time this will almost always lead to a game being won, the amount of moves that are made is left totally to chance. Solutions of this algorithm differ alot in terms of the amount of moves it takes to win, however the runtime of this algorithm is still very quick, as it consists of just a few lines of code and no remembering of whole board states.
 
 
+# Usage
+Open main.py and change the inputdata variable to a CSV file (example game starting board are found inside the data>gameboards folder. 
+After this run the main.py file and answer the prompt on which algorithm you would like to use (depth, breadth or random).
+Wait untill the CMD line stops loading and says it's finished.
+The resulting solution can be seen in the data>output folder.
 
 <sub><sup>By: Felix Blom, Frank Hofman & Merrin Maas</sup></sub>
