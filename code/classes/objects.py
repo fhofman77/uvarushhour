@@ -1,11 +1,11 @@
 import csv
 import re
 from code.visualisation.visualise import print_board
-import numpy as np
+
 
 def initialize_cars(csv_input):
     """
-    Loads the board from the csv file
+    Loads the board and car objects from the csv file
     """
     # read and store vehicle information from file in correct order
     vehicles = []
@@ -16,7 +16,7 @@ def initialize_cars(csv_input):
             vehicle = Car(row[0], row[1], row[2], row[3], row[4])
             vehicles.append(vehicle)
 
-    # creats the occupied rows and columns of the board based on orientation and length
+    # Create the occupied rows and columns matrix of the board based on orientation and length of the cars
     occupied_row_col = []
     for car in vehicles:
         if car.orientation == 'H':
@@ -34,7 +34,9 @@ def initialize_cars(csv_input):
 
 
 def get_board_size(inputdata):
-    """Finds the value between 'Rushhour' and 'x' and returns it as an int"""
+    """
+    Finds the value between 'Rushhour' and 'x' and returns it as an int
+    """
     board_size = re.search('Rushhour(.*)x', inputdata)
     board_size = int((board_size.group(1)))
     return board_size
@@ -50,12 +52,12 @@ class Board():
         self.vehicles, self.occupied_row_col = initialize_cars(
             inputdata)
 
-    def size(self):
-        return self.size
-
     def move_car(self, car, distance):
-        """Change car.car to car"""
+        """
+        Moves a car in the occupied row/col matrix if the move is legal
+        """
         move_made = 0
+        # First check if the move is valid, if it is not return false
         for item in self.occupied_row_col:
             if item[0] == car.car and car.orientation == "H":
                 if self.valid_horizontal_move(car, item[2], item[2]+distance) == False:
@@ -65,7 +67,7 @@ class Board():
                 if self.valid_vertical_move(car, item[1], item[1]+distance) == False:
                     return False
 
-        # Making a move based on the give distance and board
+        # Execute the move based on the give distance and board
         for item in self.occupied_row_col:
             if item[0] == car.car and car.orientation == "H":
                 item[2] = item[2] + distance
@@ -74,19 +76,22 @@ class Board():
             if item[0] == car.car and car.orientation == "V":
                 item[1] = item[1] + distance
                 move_made += 1
-        
-        # check whether the move is made correctly
+
+        # Check for moving a car, as we move multiple spaces
         if move_made > 0:
             return True
         else:
             return False
 
     def print(self):
+        """
+        Prints a visual representation of the board
+        """
         return print_board(self.occupied_row_col, self.size)
 
     def valid_vertical_move(self, car, startpoint, endpoint):
         """
-        checks if a vertical move is possible
+        Checks if a vertical move is possible
         """
         if endpoint <= 0 or endpoint > self.size:
             return False
@@ -101,7 +106,7 @@ class Board():
 
     def valid_horizontal_move(self, car, startpoint, endpoint):
         """
-         Checks if a horizontal move is possible
+        Checks if a horizontal move is possible
         """
         if endpoint <= 0 or endpoint > self.size:
             return False
@@ -118,15 +123,20 @@ class Board():
 
     def won_game(self):
         """
-        If end_board == current_board return true
+        Returns True if the game is won
         """
         escape_car = self.occupied_row_col[-1]
         if escape_car[2] == 6:
             return True
         else:
-            return False 
+            return False
+
 
 class Car():
+    """
+    The car object is mostly used to return its orientation and the car name
+    """
+
     def __init__(self, car, orientation, col, row, length):
         self.car = car
         self.orientation = orientation

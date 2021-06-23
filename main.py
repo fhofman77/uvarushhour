@@ -1,11 +1,13 @@
-from code.algorithms.random import random_move
-from code.algorithms.breadth_depth import BFS_DFS
-from code.visualisation.visualise import create_csv
+from code.algorithms.algorithm import random_move, BFS_DFS
 from code.classes.objects import Board
+from code.visualisation.visualise import create_csv
 import sys
 
-# Choose a gameboard.
+# Choose a gameboard. Then run the file
 inputdata = 'data/gameboards/Rushhour6x6_1.csv'
+"""
+A prompt will ask what algorithm you would like to use, the solution can then be found in the data/output folder
+"""
 board = Board(inputdata)
 
 algorithm = input('Choose an algorithm: breadth, depth or random\n')

@@ -1,4 +1,7 @@
-import queue, copy, sys
+import queue
+import copy
+import sys
+import random
 
 
 def BFS_DFS(board, search_method):
@@ -21,7 +24,7 @@ def BFS_DFS(board, search_method):
                         children.append(route)
 
         return children
-    
+
     def solver(board, search_method):
         """
         A function that tries to solve the board in a breadth or depth first search algorithm
@@ -77,3 +80,17 @@ def BFS_DFS(board, search_method):
         for state in all_states:
             if last_state[1] == state[0]:
                 last_state = state
+
+
+def random_move(board):
+    """ 
+    Contains the random algorithm for solving the rushhour puzzle, makes a valid positive of negative move for a random car
+    """
+    car = random.choice(board.vehicles)
+    number = random.randrange(1, board.size-1)
+    if random.random() < 0.5:
+        number = number
+    else:
+        number = -number
+    if board.move_car(car, number):
+        return [car.car, number]
